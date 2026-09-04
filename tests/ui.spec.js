@@ -57,7 +57,7 @@ test('layout não estoura a página nem corta CTAs dentro dos cards', async ({ p
 });
 
 test('cards de assinatura permanecem alinhados no mobile', async ({ page }, testInfo) => {
-  test.skip(testInfo.project.name !== 'mobile-safari');
+  test.skip(!['mobile-safari', 'mobile-android'].includes(testInfo.project.name));
   const metrics = await page.evaluate(() => {
     const cards = [...document.querySelectorAll('.plan-card:not(.commercial)')];
     const tops = cards.map((card) => Math.round(card.getBoundingClientRect().top));
