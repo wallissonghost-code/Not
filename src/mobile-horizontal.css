@@ -1,0 +1,40 @@
+@media (max-width: 620px) {
+  /* Mantém os cards no mobile em uma faixa horizontal, como no desktop. */
+  .game-grid,
+  .plan-grid {
+    display: flex;
+    gap: 14px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding: 2px 14px 14px 0;
+    margin-right: -14px;
+  }
+
+  .game-grid::-webkit-scrollbar,
+  .plan-grid::-webkit-scrollbar {
+    display: none;
+  }
+
+  .game-card,
+  .plan-card {
+    flex: 0 0 min(82vw, 340px);
+    width: min(82vw, 340px);
+    scroll-snap-align: start;
+  }
+
+  .game-card:last-child,
+  .plan-card:last-child {
+    grid-column: auto;
+  }
+
+  .game-card {
+    min-height: 330px;
+  }
+
+  .plan-card {
+    min-height: 420px;
+  }
+}
