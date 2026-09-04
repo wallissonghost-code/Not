@@ -27,133 +27,84 @@
   font-weight: 800;
   letter-spacing: .16em;
 }
-.launch-live-dot {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: var(--accent);
-  box-shadow: 0 0 14px rgba(184,255,61,.8);
-}
-.launch-campaign h3 {
-  margin: 12px 0 7px;
-  font-size: clamp(25px, 3vw, 38px);
-  line-height: 1;
-  letter-spacing: -.045em;
-}
-.launch-campaign p {
-  margin: 0;
-  color: var(--muted);
-  font-size: 13px;
-  line-height: 1.55;
-}
+.launch-live-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 14px rgba(184,255,61,.8); }
+.launch-campaign h3 { margin: 12px 0 7px; font-size: clamp(25px, 3vw, 38px); line-height: 1; letter-spacing: -.045em; }
+.launch-campaign p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.55; }
 .launch-campaign p strong { color: #dce2ec; font-weight: 600; }
 
-.launch-timer-wrap {
-  flex: 0 0 auto;
-  min-width: 365px;
-  padding-left: 24px;
-  border-left: 1px solid var(--line);
-}
-.timer-label {
-  display: block;
-  margin-bottom: 8px;
-  color: var(--muted);
-  font-size: 9px;
-  font-weight: 700;
-  letter-spacing: .14em;
-  text-transform: uppercase;
-}
-.countdown {
-  display: flex;
-  align-items: baseline;
-  gap: 8px;
-  font-variant-numeric: tabular-nums;
-}
+.launch-timer-wrap { flex: 0 0 auto; min-width: 365px; padding-left: 24px; border-left: 1px solid var(--line); }
+.timer-label { display: block; margin-bottom: 8px; color: var(--muted); font-size: 9px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+.countdown { display: flex; align-items: baseline; gap: 8px; font-variant-numeric: tabular-nums; }
 .time-unit { display: flex; align-items: baseline; gap: 4px; }
-.time-unit strong {
-  font-size: 28px;
-  line-height: 1;
-  letter-spacing: -.05em;
-  color: var(--text);
-}
-.time-unit span {
-  color: var(--muted);
-  font-size: 9px;
-  font-weight: 600;
-  text-transform: uppercase;
-}
-.countdown i {
-  color: rgba(255,255,255,.24);
-  font-size: 18px;
-  font-style: normal;
-}
+.time-unit strong { font-size: 28px; line-height: 1; letter-spacing: -.05em; color: var(--text); }
+.time-unit span { color: var(--muted); font-size: 9px; font-weight: 600; text-transform: uppercase; }
+.countdown i { color: rgba(255,255,255,.24); font-size: 18px; font-style: normal; }
 .campaign-ended { font-size: 16px; font-weight: 700; color: var(--muted); }
 
-.price-offer-row {
-  display: flex;
-  align-items: center;
-  gap: 9px;
-  margin-top: 25px;
-  min-height: 23px;
+.price-offer-row { display: flex; align-items: center; gap: 9px; margin-top: 25px; min-height: 23px; }
+.regular-price { color: #747d8c; font-size: 13px; text-decoration: line-through; text-decoration-thickness: 1px; }
+.discount-pill { display: inline-flex; align-items: center; padding: 4px 7px; border-radius: 999px; background: rgba(184,255,61,.11); border: 1px solid rgba(184,255,61,.2); color: var(--accent); font-size: 9px; font-weight: 800; letter-spacing: .06em; }
+.launch-price-row { display: flex; align-items: flex-end; gap: 5px; margin-top: 3px; white-space: nowrap; }
+.launch-price-row .currency { margin-bottom: 7px; font-size: 18px; color: #dfe4ed; }
+.launch-price-row strong { font-size: 48px; line-height: .95; letter-spacing: -.06em; font-weight: 600; }
+.launch-price-row small { margin-bottom: 7px; color: var(--muted); font-size: 11px; }
+.launch-price-caption { display: inline-block; margin-top: 7px; color: var(--accent); font-size: 9px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+
+.plan-card.commercial {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  border-color: rgba(116,242,206,.28);
+  background:
+    linear-gradient(rgba(116,242,206,.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(116,242,206,.035) 1px, transparent 1px),
+    radial-gradient(circle at 78% 18%, rgba(116,242,206,.14), transparent 28%),
+    linear-gradient(155deg, rgba(14,25,27,.96), rgba(11,14,20,.98) 58%, var(--surface));
+  background-size: 34px 34px, 34px 34px, auto, auto;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.035), 0 24px 70px rgba(0,0,0,.18);
 }
-.regular-price {
-  color: #747d8c;
-  font-size: 13px;
-  text-decoration: line-through;
-  text-decoration-thickness: 1px;
+.plan-card.commercial::after {
+  content: "";
+  position: absolute;
+  width: 180px;
+  height: 180px;
+  border: 1px solid rgba(116,242,206,.12);
+  border-radius: 38px;
+  right: -70px;
+  top: 54px;
+  transform: rotate(32deg);
+  pointer-events: none;
+  z-index: -1;
 }
-.discount-pill {
-  display: inline-flex;
-  align-items: center;
-  padding: 4px 7px;
-  border-radius: 999px;
-  background: rgba(184,255,61,.11);
-  border: 1px solid rgba(184,255,61,.2);
-  color: var(--accent);
-  font-size: 9px;
+.plan-card.commercial .plan-label { color: #b8c9cb; }
+.plan-card.commercial .plan-label span {
+  color: #9fffe8;
+  background: rgba(116,242,206,.08);
+  border: 1px solid rgba(116,242,206,.22);
+}
+.creator-symbol {
+  width: 54px;
+  height: 54px;
+  margin-top: 26px;
+  display: grid;
+  place-items: center;
+  border-radius: 16px;
+  border: 1px solid rgba(116,242,206,.22);
+  background: rgba(116,242,206,.07);
+  color: #a4ffe9;
+  font-size: 17px;
   font-weight: 800;
-  letter-spacing: .06em;
+  letter-spacing: -.05em;
+  box-shadow: 0 0 30px rgba(116,242,206,.06);
 }
-.launch-price-row {
-  display: flex;
-  align-items: flex-end;
-  gap: 5px;
-  margin-top: 3px;
-  white-space: nowrap;
+.commercial-price { margin-top: 19px; font-size: 30px; line-height: 1.1; font-weight: 650; letter-spacing: -.035em; }
+.plan-card.commercial .plan-description { color: #9ba8b2; }
+.plan-card.commercial .plan-features span::before { color: #74f2ce; }
+.plan-card.commercial .primary-button {
+  color: #07110f;
+  background: linear-gradient(135deg, #9fffe8, #74f2ce);
+  box-shadow: 0 12px 32px rgba(116,242,206,.10);
 }
-.launch-price-row .currency {
-  margin-bottom: 7px;
-  font-size: 18px;
-  color: #dfe4ed;
-}
-.launch-price-row strong {
-  font-size: 48px;
-  line-height: .95;
-  letter-spacing: -.06em;
-  font-weight: 600;
-}
-.launch-price-row small {
-  margin-bottom: 7px;
-  color: var(--muted);
-  font-size: 11px;
-}
-.launch-price-caption {
-  display: inline-block;
-  margin-top: 7px;
-  color: var(--accent);
-  font-size: 9px;
-  font-weight: 700;
-  letter-spacing: .1em;
-  text-transform: uppercase;
-}
-.commercial-price {
-  margin-top: 29px;
-  font-size: 28px;
-  line-height: 1.1;
-  font-weight: 600;
-  letter-spacing: -.03em;
-}
-.plan-card.commercial { background: linear-gradient(180deg, rgba(116,242,206,.04), var(--surface) 45%); }
 
 @media (min-width: 901px) {
   .plan-grid { grid-template-columns: repeat(4, 1fr); }
@@ -162,23 +113,14 @@
 }
 
 @media (max-width: 720px) {
-  .launch-campaign {
-    padding: 18px;
-    gap: 18px;
-    align-items: stretch;
-    flex-direction: column;
-    border-radius: 20px;
-  }
+  .launch-campaign { padding: 18px; gap: 18px; align-items: stretch; flex-direction: column; border-radius: 20px; }
   .launch-campaign h3 { font-size: 27px; }
-  .launch-timer-wrap {
-    min-width: 0;
-    padding: 15px 0 0;
-    border-left: 0;
-    border-top: 1px solid var(--line);
-  }
+  .launch-timer-wrap { min-width: 0; padding: 15px 0 0; border-left: 0; border-top: 1px solid var(--line); }
   .countdown { gap: 6px; }
   .time-unit strong { font-size: 24px; }
   .time-unit span { font-size: 8px; }
   .countdown i { font-size: 14px; }
   .launch-price-row strong { font-size: 44px; }
+  .creator-symbol { width: 50px; height: 50px; margin-top: 22px; }
+  .commercial-price { font-size: 31px; }
 }
