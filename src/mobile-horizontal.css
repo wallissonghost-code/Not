@@ -1,5 +1,5 @@
 @media (max-width: 620px) {
-  /* Mantém os cards no mobile em uma faixa horizontal, como no desktop. */
+  /* Mantém os cards no mobile em uma faixa horizontal, mas cada um usa apenas a altura necessária. */
   .game-grid,
   .plan-grid {
     display: flex;
@@ -11,6 +11,7 @@
     scrollbar-width: none;
     padding: 2px 14px 14px 0;
     margin-right: -14px;
+    align-items: flex-start;
   }
 
   .game-grid::-webkit-scrollbar,
@@ -35,6 +36,16 @@
   }
 
   .plan-card {
-    min-height: 420px;
+    min-height: 0;
+    height: auto;
+    align-self: flex-start;
+  }
+
+  .plan-card .plan-description {
+    min-height: 0;
+  }
+
+  .plan-card .primary-button {
+    margin-top: 24px;
   }
 }
