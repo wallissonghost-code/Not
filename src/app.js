@@ -1,4 +1,4 @@
-import { games, benefits, plans, launchEndsAt } from './data.js?v=12';
+import { games, benefits, plans, launchEndsAt } from './data.js?v=13';
 
 const gameGrid = document.querySelector('[data-game-grid]');
 const benefitList = document.querySelector('[data-benefit-list]');
