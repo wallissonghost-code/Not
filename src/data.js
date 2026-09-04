@@ -20,8 +20,7 @@ export const plans = [
       { label: 'Conector NOT', included: true },
       { label: 'Benefícios básicos', included: true },
       { label: 'Catálogo completo de jogos', included: false },
-      { label: 'Conector Plus', included: false },
-      { label: 'Benefícios exclusivos', included: false },
+      { label: 'Conector AutoPlay', included: false },
       { label: 'Acesso antecipado', included: false },
       { label: 'Prioridade em novidades', included: false }
     ]
@@ -33,8 +32,7 @@ export const plans = [
       { label: 'Conector NOT', included: true },
       { label: 'Benefícios básicos', included: true },
       { label: 'Catálogo completo de jogos', included: true },
-      { label: 'Conector Plus', included: true },
-      { label: 'Benefícios exclusivos', included: true },
+      { label: 'Conector AutoPlay', included: true },
       { label: 'Acesso antecipado', included: false },
       { label: 'Prioridade em novidades', included: false }
     ]
@@ -46,8 +44,7 @@ export const plans = [
       { label: 'Conector NOT', included: true },
       { label: 'Benefícios básicos', included: true },
       { label: 'Catálogo completo de jogos', included: true },
-      { label: 'Conector Plus', included: true },
-      { label: 'Benefícios exclusivos', included: true },
+      { label: 'Conector AutoPlay', included: true },
       { label: 'Acesso antecipado', included: true },
       { label: 'Prioridade em novidades', included: true }
     ]
