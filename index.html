@@ -9,28 +9,16 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="./src/styles.css" />
-  <link rel="stylesheet" href="./src/mobile-horizontal.css" />
-  <link rel="stylesheet" href="./src/launch-offer.css" />
+  <link rel="stylesheet" href="./src/styles.css?v=4" />
+  <link rel="stylesheet" href="./src/mobile-horizontal.css?v=4" />
+  <link rel="stylesheet" href="./src/launch-offer.css?v=4" />
 </head>
 <body>
   <div class="site-shell">
     <header class="topbar" id="top">
-      <a class="brand" href="#top" aria-label="NOT - início">
-        <span class="brand-mark">N</span>
-        <span>NOT</span>
-      </a>
-
-      <nav class="desktop-nav" aria-label="Navegação principal">
-        <a href="#catalogo">Catálogo</a>
-        <a href="#vantagens">Vantagens</a>
-        <a href="#planos">Planos</a>
-      </nav>
-
-      <button class="login-button" type="button" data-action="login">
-        <span class="status-dot"></span>
-        Entrar
-      </button>
+      <a class="brand" href="#top" aria-label="NOT - início"><span class="brand-mark">N</span><span>NOT</span></a>
+      <nav class="desktop-nav" aria-label="Navegação principal"><a href="#catalogo">Catálogo</a><a href="#vantagens">Vantagens</a><a href="#planos">Planos</a></nav>
+      <button class="login-button" type="button" data-action="login"><span class="status-dot"></span>Entrar</button>
     </header>
 
     <main>
@@ -39,95 +27,40 @@
           <div class="eyebrow"><span></span> ACESSO PREMIUM</div>
           <h1>Seu próximo jogo começa <em>aqui.</em></h1>
           <p>Uma biblioteca premium com experiências selecionadas, acesso simples e conteúdo organizado para jogar no seu ritmo.</p>
-
-          <div class="hero-actions">
-            <a class="primary-button" href="#planos">Ver assinaturas <span>↗</span></a>
-            <a class="text-button" href="#catalogo">Explorar catálogo</a>
-          </div>
-
-          <div class="trust-row" aria-label="Benefícios rápidos">
-            <div><strong>01</strong><span>Acesso simples</span></div>
-            <div><strong>02</strong><span>Conteúdo premium</span></div>
-            <div><strong>03</strong><span>Mobile + PC</span></div>
-          </div>
+          <div class="hero-actions"><a class="primary-button" href="#planos">Ver assinaturas <span>↗</span></a><a class="text-button" href="#catalogo">Explorar catálogo</a></div>
+          <div class="trust-row" aria-label="Benefícios rápidos"><div><strong>01</strong><span>Acesso simples</span></div><div><strong>02</strong><span>Conteúdo premium</span></div><div><strong>03</strong><span>Mobile + PC</span></div></div>
         </div>
-
-        <div class="hero-visual" aria-hidden="true">
-          <div class="glow glow-one"></div>
-          <div class="glow glow-two"></div>
-          <article class="showcase-card showcase-main">
-            <div class="card-badge">DESTAQUE</div>
-            <div class="game-art game-art-main"><span>NOT</span></div>
-            <div class="showcase-meta">
-              <div><span>COLEÇÃO</span><strong>Premium Vault</strong></div>
-              <small>2026 / 01</small>
-            </div>
-          </article>
-          <article class="showcase-card showcase-back">
-            <div class="game-art game-art-back"></div>
-          </article>
-        </div>
+        <div class="hero-visual" aria-hidden="true"><div class="glow glow-one"></div><div class="glow glow-two"></div><article class="showcase-card showcase-main"><div class="card-badge">DESTAQUE</div><div class="game-art game-art-main"><span>NOT</span></div><div class="showcase-meta"><div><span>COLEÇÃO</span><strong>Premium Vault</strong></div><small>2026 / 01</small></div></article><article class="showcase-card showcase-back"><div class="game-art game-art-back"></div></article></div>
       </section>
 
-      <section class="catalog section-pad" id="catalogo">
-        <div class="section-heading">
-          <div>
-            <span class="kicker">SELEÇÃO</span>
-            <h2>Jogos em destaque</h2>
-          </div>
-          <p>Estrutura pronta para receber sua biblioteca real, filtros e conteúdo exclusivo após o login.</p>
-        </div>
+      <section class="catalog section-pad" id="catalogo"><div class="section-heading"><div><span class="kicker">SELEÇÃO</span><h2>Jogos em destaque</h2></div><p>Estrutura pronta para receber sua biblioteca real, filtros e conteúdo exclusivo após o login.</p></div><div class="game-grid" data-game-grid></div></section>
 
-        <div class="game-grid" data-game-grid></div>
-      </section>
-
-      <section class="benefits section-pad" id="vantagens">
-        <div class="benefit-intro">
-          <span class="kicker">POR QUE NOT</span>
-          <h2>Menos ruído.<br />Mais jogo.</h2>
-        </div>
-        <div class="benefit-list" data-benefit-list></div>
-      </section>
+      <section class="benefits section-pad" id="vantagens"><div class="benefit-intro"><span class="kicker">POR QUE NOT</span><h2>Menos ruído.<br />Mais jogo.</h2></div><div class="benefit-list" data-benefit-list></div></section>
 
       <section class="plans section-pad" id="planos">
-        <div class="section-heading plans-heading">
-          <div>
-            <span class="kicker">ASSINATURAS</span>
-            <h2>Escolha seu acesso</h2>
-          </div>
-          <p>Preço de lançamento disponível por tempo limitado. Após o encerramento, os valores regulares entram em vigor automaticamente.</p>
-        </div>
+        <div class="section-heading plans-heading"><div><span class="kicker">ASSINATURAS</span><h2>Escolha seu acesso</h2></div><p>Entre durante o lançamento e aproveite valores especiais até 01/11/2026.</p></div>
 
-        <div class="launch-offer" aria-label="Oferta de lançamento">
-          <div class="launch-copy">
-            <span class="kicker">🔥 OFERTA DE LANÇAMENTO</span>
-            <h3>Preço especial até 01/11/2026</h3>
-            <p data-offer-status>O contador usa uma data final fixa e continua de onde deveria mesmo se você sair e voltar.</p>
+        <div class="launch-campaign" data-launch-campaign>
+          <div class="launch-campaign-copy">
+            <div class="launch-badge"><span class="launch-live-dot"></span> PREÇO DE LANÇAMENTO</div>
+            <h3>Entre agora pagando menos.</h3>
+            <p>Condição especial de estreia válida até <strong>01/11/2026</strong>.</p>
           </div>
-          <div class="countdown" data-countdown aria-live="polite"></div>
+          <div class="launch-timer-wrap">
+            <span class="timer-label">A condição muda em</span>
+            <div class="countdown" data-countdown aria-live="polite"></div>
+          </div>
         </div>
 
         <div class="plan-grid" data-plan-grid></div>
       </section>
 
-      <section class="members-cta section-pad">
-        <div>
-          <span class="kicker">ÁREA DE MEMBROS</span>
-          <h2>Já é assinante?</h2>
-          <p>Entre na sua conta para acessar os conteúdos liberados para o seu perfil.</p>
-        </div>
-        <button class="secondary-button" type="button" data-action="login">Acessar minha conta <span>→</span></button>
-      </section>
+      <section class="members-cta section-pad"><div><span class="kicker">ÁREA DE MEMBROS</span><h2>Já é assinante?</h2><p>Entre na sua conta para acessar os conteúdos liberados para o seu perfil.</p></div><button class="secondary-button" type="button" data-action="login">Acessar minha conta <span>→</span></button></section>
     </main>
 
-    <footer class="footer section-pad">
-      <a class="brand footer-brand" href="#top"><span class="brand-mark">N</span><span>NOT</span></a>
-      <p>Game memberships. Sem complicação.</p>
-      <span>© <span data-year></span> NOT</span>
-    </footer>
+    <footer class="footer section-pad"><a class="brand footer-brand" href="#top"><span class="brand-mark">N</span><span>NOT</span></a><p>Game memberships. Sem complicação.</p><span>© <span data-year></span> NOT</span></footer>
   </div>
-
   <div class="toast" role="status" aria-live="polite" data-toast></div>
-  <script type="module" src="./src/app.js"></script>
+  <script type="module" src="./src/app.js?v=4"></script>
 </body>
 </html>
