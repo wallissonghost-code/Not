@@ -1,4 +1,4 @@
-import { games, benefits, plans, launchEndsAt } from './data.js?v=9';
+import { games, benefits, plans, launchEndsAt } from './data.js?v=11';
 
 const gameGrid = document.querySelector('[data-game-grid]');
 const benefitList = document.querySelector('[data-benefit-list]');
@@ -45,39 +45,25 @@ function discountPercent(regularPrice, launchPrice) {
   return Math.round((1 - launch / regular) * 100);
 }
 
+function renderPlanFeatures(plan) {
+  if (plan.commercial) return plan.features.map((feature) => `<span class="feature-item included">${feature}</span>`).join('');
+  return plan.features.map((feature) => `<span class="feature-item ${feature.included ? 'included' : 'unavailable'}">${feature.label}</span>`).join('');
+}
+
 function renderPlans() {
   if (!planGrid) return;
   const launchActive = isLaunchActive();
-
   planGrid.innerHTML = plans.map((plan) => {
     let priceMarkup = '';
-
     if (plan.commercial) {
-      priceMarkup = `
-        <div class="creator-symbol" aria-hidden="true">&lt;/&gt;</div>
-        <h3 class="creator-headline">${plan.headline}</h3>
-        <div class="commercial-price">${plan.priceLabel}</div>
-      `;
+      priceMarkup = `<div class="creator-symbol" aria-hidden="true">&lt;/&gt;</div><h3 class="creator-headline">${plan.headline}</h3><div class="commercial-price">${plan.priceLabel}</div>`;
     } else if (launchActive) {
       const discount = discountPercent(plan.regularPrice, plan.launchPrice);
-      priceMarkup = `
-        <div class="price-offer-row"><span class="regular-price">de R$ ${plan.regularPrice}</span><span class="discount-pill">-${discount}%</span></div>
-        <div class="launch-price-row"><span class="currency">R$</span><strong>${plan.launchPrice}</strong><small>${plan.suffix}</small></div>
-        <span class="launch-price-caption">preço de lançamento</span>
-      `;
+      priceMarkup = `<div class="price-offer-row"><span class="regular-price">de R$ ${plan.regularPrice}</span><span class="discount-pill">-${discount}%</span></div><div class="launch-price-row"><span class="currency">R$</span><strong>${plan.launchPrice}</strong><small>${plan.suffix}</small></div><span class="launch-price-caption">preço de lançamento</span>`;
     } else {
       priceMarkup = `<div class="launch-price-row"><span class="currency">R$</span><strong>${plan.regularPrice}</strong><small>${plan.suffix}</small></div>`;
     }
-
-    return `
-      <article class="plan-card ${plan.featured ? 'featured' : ''} ${plan.commercial ? 'commercial' : ''}">
-        <div class="plan-label">${plan.name}${plan.badge ? `<span>${plan.badge}</span>` : ''}</div>
-        ${priceMarkup}
-        <p class="plan-description">${plan.description}</p>
-        <div class="plan-features">${plan.features.map((feature) => `<span>${feature}</span>`).join('')}</div>
-        <button class="primary-button" type="button" data-action="${plan.commercial ? 'creator' : 'subscribe'}" data-plan="${plan.name}">${plan.commercial ? 'Solicitar projeto' : `Escolher ${plan.name}`} <span>↗</span></button>
-      </article>
-    `;
+    return `<article class="plan-card ${plan.featured ? 'featured' : ''} ${plan.commercial ? 'commercial' : ''}"><div class="plan-label">${plan.name}${plan.badge ? `<span>${plan.badge}</span>` : ''}</div>${priceMarkup}<p class="plan-description">${plan.description}</p><div class="plan-features">${renderPlanFeatures(plan)}</div><button class="primary-button" type="button" data-action="${plan.commercial ? 'creator' : 'subscribe'}" data-plan="${plan.name}">${plan.commercial ? 'Solicitar projeto' : `Escolher ${plan.name}`} <span>↗</span></button></article>`;
   }).join('');
 }
 
