@@ -10,8 +10,43 @@ export const benefits = [
   { number: '03', title: 'Experiência responsiva', description: 'O layout se adapta de celular a desktop sem depender de uma versão duplicada do site.' }
 ];
 
+export const launchEndsAt = '2026-11-01T00:00:00-03:00';
+
 export const plans = [
-  { name: 'START', price: '19,90', suffix: '/ mês', description: 'Entrada simples para acessar a seleção principal.', features: ['Acesso à biblioteca Start', 'Conteúdo exclusivo', 'Perfil de membro'], featured: false },
-  { name: 'CORE', price: '39,90', suffix: '/ mês', description: 'O plano principal para quem quer acesso completo.', features: ['Biblioteca completa', 'Novos conteúdos', 'Acesso prioritário'], featured: true, badge: 'RECOMENDADO' },
-  { name: 'VAULT', price: '69,90', suffix: '/ mês', description: 'Camada premium preparada para benefícios especiais.', features: ['Tudo do plano Core', 'Conteúdo Vault', 'Benefícios exclusivos'], featured: false }
+  {
+    name: 'NORMAL',
+    launchPrice: '9,99',
+    regularPrice: '19,90',
+    suffix: '/ mês',
+    description: 'Para começar.',
+    features: ['Acesso a uma seleção de jogos', 'Conector NOT', 'Benefícios básicos'],
+    featured: false
+  },
+  {
+    name: 'PLUS',
+    launchPrice: '20,00',
+    regularPrice: '34,90',
+    suffix: '/ mês',
+    description: 'Melhor custo-benefício para aproveitar a NOT completa.',
+    features: ['Todos os jogos', 'Conector Plus', 'Benefícios exclusivos', 'Melhor custo-benefício'],
+    featured: true,
+    badge: 'MAIS POPULAR'
+  },
+  {
+    name: 'PREMIUM',
+    launchPrice: '39,99',
+    regularPrice: '54,90',
+    suffix: '/ mês',
+    description: 'Para quem quer tudo.',
+    features: ['Todos os jogos', 'Conector Plus', 'Acesso antecipado', 'Conteúdos e benefícios exclusivos', 'Prioridade em novidades'],
+    featured: false
+  },
+  {
+    name: 'CREATOR',
+    priceLabel: 'Valor a combinar',
+    description: 'Para quem quer trazer seu próprio jogo para a NOT.',
+    features: ['Tudo do Premium', 'Adaptação de um jogo para a plataforma', 'Publicação na NOT', 'Suporte para integração', 'Condições personalizadas'],
+    featured: false,
+    commercial: true
+  }
 ];
