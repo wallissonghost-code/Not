@@ -44,9 +44,10 @@ export const plans = [
   {
     name: 'CREATOR',
     priceLabel: 'Valor a combinar',
-    description: 'Para quem quer trazer seu próprio jogo para a NOT.',
-    features: ['Tudo do Premium', 'Adaptação de um jogo para a plataforma', 'Publicação na NOT', 'Suporte para integração', 'Condições personalizadas'],
+    description: 'Traga seu jogo para o ecossistema NOT.',
+    features: ['Tudo do Premium', 'Adaptação do jogo para a plataforma', 'Publicação realizada pela equipe NOT', 'Suporte técnico para integração', 'Configuração e testes', 'Condições personalizadas'],
     featured: false,
-    commercial: true
+    commercial: true,
+    badge: 'PARA CRIADORES'
   }
 ];
