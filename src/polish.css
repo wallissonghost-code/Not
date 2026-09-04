@@ -176,54 +176,66 @@
   }
 
   .site-footer {
-    margin-top: 30px;
+    margin-top: 22px;
   }
 
   .site-footer > .section-pad {
-    padding-block: 20px 18px;
+    padding-block: 14px 12px;
   }
 
   .footer-grid {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 20px 18px;
+    gap: 14px 16px;
     align-items: start;
   }
 
   .footer-about {
     grid-column: 1 / -1;
-    padding: 0;
-  }
-
-  .footer-about .brand-mark {
-    width: 30px;
-    height: 30px;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    grid-template-areas:
+      "brand text social";
+    align-items: center;
+    gap: 10px 12px;
+    padding: 0 0 8px;
   }
 
   .footer-about .brand {
-    font-size: 14px;
-  }
-
-  .footer-about p {
-    max-width: 100%;
-    margin-top: 10px;
-    font-size: 11px;
-    line-height: 1.5;
-  }
-
-  .footer-social {
-    margin-top: 12px;
+    grid-area: brand;
+    font-size: 13px;
     gap: 8px;
   }
 
+  .footer-about .brand-mark {
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+    font-size: 13px;
+  }
+
+  .footer-about p {
+    grid-area: text;
+    max-width: none;
+    margin: 0;
+    font-size: 9.5px;
+    line-height: 1.4;
+  }
+
+  .footer-social {
+    grid-area: social;
+    margin-top: 0;
+    gap: 6px;
+  }
+
   .social-link {
-    width: 32px;
-    height: 32px;
+    width: 28px;
+    height: 28px;
   }
 
   .social-link svg {
-    width: 16px;
-    height: 16px;
+    width: 14px;
+    height: 14px;
   }
 
   .footer-group {
@@ -233,9 +245,9 @@
 
   .footer-group > h3 {
     display: block;
-    margin: 0 0 8px;
-    font-size: 10px;
-    letter-spacing: .1em;
+    margin: 0 0 6px;
+    font-size: 9px;
+    letter-spacing: .09em;
   }
 
   .footer-toggle {
@@ -250,26 +262,28 @@
 
   .footer-links-inner {
     display: grid;
-    gap: 6px;
+    gap: 4px;
     padding-bottom: 0 !important;
   }
 
   .footer-links a,
   .footer-links button {
-    font-size: 10.5px;
-    line-height: 1.35;
+    font-size: 9.5px;
+    line-height: 1.3;
   }
 
   .footer-bottom {
-    margin-top: 16px;
-    padding-top: 14px;
-    align-items: flex-start;
-    flex-direction: column;
-    gap: 8px;
-    font-size: 10px;
+    margin-top: 10px;
+    padding-top: 10px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 10px;
+    font-size: 9px;
   }
 
   .footer-legal {
-    gap: 14px;
+    gap: 10px;
+    flex-wrap: nowrap;
   }
 }
