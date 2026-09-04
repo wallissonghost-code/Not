@@ -1,10 +1,12 @@
-import { games, benefits, plans } from './data.js';
+import { games, benefits, plans, launchEndsAt } from './data.js';
 
 const gameGrid = document.querySelector('[data-game-grid]');
 const benefitList = document.querySelector('[data-benefit-list]');
 const planGrid = document.querySelector('[data-plan-grid]');
 const toast = document.querySelector('[data-toast]');
 const year = document.querySelector('[data-year]');
+const countdown = document.querySelector('[data-countdown]');
+const offerStatus = document.querySelector('[data-offer-status]');
 
 if (year) year.textContent = new Date().getFullYear();
 
@@ -26,6 +28,9 @@ document.addEventListener('touchend', (event) => {
 }, { passive: false });
 
 document.addEventListener('dblclick', (event) => event.preventDefault());
+
+const launchDeadline = new Date(launchEndsAt).getTime();
+const isLaunchActive = () => Date.now() < launchDeadline;
 
 function renderGames() {
   if (!gameGrid) return;
@@ -59,22 +64,64 @@ function renderBenefits() {
 
 function renderPlans() {
   if (!planGrid) return;
-  planGrid.innerHTML = plans.map((plan) => `
-    <article class="plan-card ${plan.featured ? 'featured' : ''}">
-      <div class="plan-label">
-        ${plan.name}
-        ${plan.badge ? `<span>${plan.badge}</span>` : ''}
-      </div>
-      <div class="plan-price">R$ ${plan.price} <small>${plan.suffix}</small></div>
-      <p class="plan-description">${plan.description}</p>
-      <div class="plan-features">
-        ${plan.features.map((feature) => `<span>${feature}</span>`).join('')}
-      </div>
-      <button class="primary-button" type="button" data-action="subscribe" data-plan="${plan.name}">
-        Escolher ${plan.name} <span>↗</span>
-      </button>
-    </article>
-  `).join('');
+  const launchActive = isLaunchActive();
+
+  planGrid.innerHTML = plans.map((plan) => {
+    const priceMarkup = plan.commercial
+      ? `<div class="plan-price commercial-price">${plan.priceLabel}</div>`
+      : launchActive
+        ? `<div class="regular-price">R$ ${plan.regularPrice}</div><div class="plan-price">R$ ${plan.launchPrice} <small>${plan.suffix}</small></div>`
+        : `<div class="plan-price">R$ ${plan.regularPrice} <small>${plan.suffix}</small></div>`;
+
+    const buttonLabel = plan.commercial ? 'Falar com a NOT' : `Escolher ${plan.name}`;
+
+    return `
+      <article class="plan-card ${plan.featured ? 'featured' : ''} ${plan.commercial ? 'commercial' : ''}">
+        <div class="plan-label">
+          ${plan.name}
+          ${plan.badge ? `<span>${plan.badge}</span>` : ''}
+        </div>
+        ${priceMarkup}
+        <p class="plan-description">${plan.description}</p>
+        <div class="plan-features">
+          ${plan.features.map((feature) => `<span>${feature}</span>`).join('')}
+        </div>
+        <button class="primary-button" type="button" data-action="${plan.commercial ? 'creator' : 'subscribe'}" data-plan="${plan.name}">
+          ${buttonLabel} <span>↗</span>
+        </button>
+      </article>
+    `;
+  }).join('');
+}
+
+function pad(value) {
+  return String(value).padStart(2, '0');
+}
+
+function updateCountdown() {
+  if (!countdown) return;
+
+  const remaining = launchDeadline - Date.now();
+
+  if (remaining <= 0) {
+    countdown.innerHTML = '<strong>OFERTA ENCERRADA</strong>';
+    if (offerStatus) offerStatus.textContent = 'Os preços regulares já estão em vigor.';
+    renderPlans();
+    return;
+  }
+
+  const totalSeconds = Math.floor(remaining / 1000);
+  const days = Math.floor(totalSeconds / 86400);
+  const hours = Math.floor((totalSeconds % 86400) / 3600);
+  const minutes = Math.floor((totalSeconds % 3600) / 60);
+  const seconds = totalSeconds % 60;
+
+  countdown.innerHTML = `
+    <div><strong>${pad(days)}</strong><span>DIAS</span></div>
+    <div><strong>${pad(hours)}</strong><span>HORAS</span></div>
+    <div><strong>${pad(minutes)}</strong><span>MIN</span></div>
+    <div><strong>${pad(seconds)}</strong><span>SEG</span></div>
+  `;
 }
 
 function showToast(message) {
@@ -96,8 +143,14 @@ document.addEventListener('click', (event) => {
   if (target.dataset.action === 'subscribe') {
     showToast(`Plano ${target.dataset.plan} selecionado. Checkout entra na próxima etapa.`);
   }
+
+  if (target.dataset.action === 'creator') {
+    showToast('Plano Creator selecionado. O contato comercial entra na próxima etapa.');
+  }
 });
 
 renderGames();
 renderBenefits();
 renderPlans();
+updateCountdown();
+setInterval(updateCountdown, 1000);
