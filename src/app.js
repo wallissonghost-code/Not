@@ -1,4 +1,4 @@
-import { games, benefits, plans, launchEndsAt } from './data.js?v=4';
+import { games, benefits, plans, launchEndsAt } from './data.js?v=7';
 
 const gameGrid = document.querySelector('[data-game-grid]');
 const benefitList = document.querySelector('[data-benefit-list]');
@@ -53,7 +53,10 @@ function renderPlans() {
     let priceMarkup = '';
 
     if (plan.commercial) {
-      priceMarkup = `<div class="commercial-price">${plan.priceLabel}</div>`;
+      priceMarkup = `
+        <div class="creator-symbol" aria-hidden="true">&lt;/&gt;</div>
+        <div class="commercial-price">${plan.priceLabel}</div>
+      `;
     } else if (launchActive) {
       const discount = discountPercent(plan.regularPrice, plan.launchPrice);
       priceMarkup = `
@@ -124,7 +127,7 @@ document.addEventListener('click', (event) => {
   if (!target) return;
   if (target.dataset.action === 'login') showToast('Login Firebase será conectado na próxima etapa.');
   if (target.dataset.action === 'subscribe') showToast(`Plano ${target.dataset.plan} selecionado. Checkout entra na próxima etapa.`);
-  if (target.dataset.action === 'creator') showToast('Plano Creator selecionado. O contato comercial entra na próxima etapa.');
+  if (target.dataset.action === 'creator') showToast('Creator selecionado. O contato comercial entra na próxima etapa.');
 });
 
 renderGames();
