@@ -185,8 +185,8 @@
 
   .footer-grid {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 14px 16px;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 14px 10px;
     align-items: start;
   }
 
@@ -194,8 +194,7 @@
     grid-column: 1 / -1;
     display: grid;
     grid-template-columns: auto 1fr auto;
-    grid-template-areas:
-      "brand text social";
+    grid-template-areas: "brand text social";
     align-items: center;
     gap: 10px 12px;
     padding: 0 0 8px;
@@ -246,8 +245,9 @@
   .footer-group > h3 {
     display: block;
     margin: 0 0 6px;
-    font-size: 9px;
-    letter-spacing: .09em;
+    font-size: 8px;
+    letter-spacing: .06em;
+    white-space: nowrap;
   }
 
   .footer-toggle {
@@ -268,7 +268,8 @@
 
   .footer-links a,
   .footer-links button {
-    font-size: 9.5px;
+    max-width: 100%;
+    font-size: 8px;
     line-height: 1.3;
   }
 
