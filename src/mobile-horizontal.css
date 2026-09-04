@@ -1,5 +1,5 @@
 @media (max-width: 620px) {
-  /* Mantém os cards no mobile em uma faixa horizontal, mas cada um usa apenas a altura necessária. */
+  /* Carrosséis horizontais no mobile. */
   .game-grid,
   .plan-grid {
     display: flex;
@@ -11,13 +11,13 @@
     scrollbar-width: none;
     padding: 2px 14px 14px 0;
     margin-right: -14px;
-    align-items: flex-start;
   }
 
+  .game-grid { align-items: flex-start; }
+  .plan-grid { align-items: stretch; }
+
   .game-grid::-webkit-scrollbar,
-  .plan-grid::-webkit-scrollbar {
-    display: none;
-  }
+  .plan-grid::-webkit-scrollbar { display: none; }
 
   .game-card,
   .plan-card {
@@ -27,25 +27,48 @@
   }
 
   .game-card:last-child,
-  .plan-card:last-child {
-    grid-column: auto;
-  }
+  .plan-card:last-child { grid-column: auto; }
 
-  .game-card {
-    min-height: 330px;
-  }
+  .game-card { min-height: 330px; }
 
+  /* Todos os planos compartilham a mesma base visual.
+     A altura vem do maior conteúdo do carrossel, sem altura fixa gigante. */
   .plan-card {
     min-height: 0;
     height: auto;
-    align-self: flex-start;
+    align-self: stretch;
+    padding: 22px;
   }
 
   .plan-card .plan-description {
     min-height: 0;
+    margin-bottom: 0;
+    font-size: 12.5px;
+    line-height: 1.5;
+  }
+
+  .plan-card .plan-features {
+    gap: 9px;
+    margin: 18px 0 20px;
+    font-size: 12.5px;
   }
 
   .plan-card .primary-button {
-    margin-top: 24px;
+    margin-top: auto;
+    min-height: 52px;
+    padding-block: 13px;
+  }
+
+  .plan-card.commercial .creator-symbol {
+    margin-top: 16px;
+  }
+
+  .plan-card.commercial .creator-headline {
+    margin-top: 16px;
+    font-size: 26px;
+  }
+
+  .plan-card.commercial .commercial-price {
+    margin-top: 8px;
   }
 }
