@@ -1,4 +1,4 @@
-import { games, benefits, plans, launchEndsAt } from './data.js?v=7';
+import { games, benefits, plans, launchEndsAt } from './data.js?v=8';
 
 const gameGrid = document.querySelector('[data-game-grid]');
 const benefitList = document.querySelector('[data-benefit-list]');
@@ -55,20 +55,14 @@ function renderPlans() {
     if (plan.commercial) {
       priceMarkup = `
         <div class="creator-symbol" aria-hidden="true">&lt;/&gt;</div>
+        <h3 class="creator-headline">${plan.headline}</h3>
         <div class="commercial-price">${plan.priceLabel}</div>
       `;
     } else if (launchActive) {
       const discount = discountPercent(plan.regularPrice, plan.launchPrice);
       priceMarkup = `
-        <div class="price-offer-row">
-          <span class="regular-price">de R$ ${plan.regularPrice}</span>
-          <span class="discount-pill">-${discount}%</span>
-        </div>
-        <div class="launch-price-row">
-          <span class="currency">R$</span>
-          <strong>${plan.launchPrice}</strong>
-          <small>${plan.suffix}</small>
-        </div>
+        <div class="price-offer-row"><span class="regular-price">de R$ ${plan.regularPrice}</span><span class="discount-pill">-${discount}%</span></div>
+        <div class="launch-price-row"><span class="currency">R$</span><strong>${plan.launchPrice}</strong><small>${plan.suffix}</small></div>
         <span class="launch-price-caption">preço de lançamento</span>
       `;
     } else {
@@ -81,37 +75,24 @@ function renderPlans() {
         ${priceMarkup}
         <p class="plan-description">${plan.description}</p>
         <div class="plan-features">${plan.features.map((feature) => `<span>${feature}</span>`).join('')}</div>
-        <button class="primary-button" type="button" data-action="${plan.commercial ? 'creator' : 'subscribe'}" data-plan="${plan.name}">${plan.commercial ? 'Falar com a NOT' : `Escolher ${plan.name}`} <span>↗</span></button>
+        ${plan.commercial ? '<div class="creator-terms"><strong>Sem divisão de lucros.</strong><span>Uso do projeto em portfólio ou divulgação da NOT somente com autorização do cliente.</span></div>' : ''}
+        <button class="primary-button" type="button" data-action="${plan.commercial ? 'creator' : 'subscribe'}" data-plan="${plan.name}">${plan.commercial ? 'Solicitar projeto' : `Escolher ${plan.name}`} <span>↗</span></button>
       </article>
     `;
   }).join('');
 }
 
 function pad(value) { return String(value).padStart(2, '0'); }
-
 function updateCountdown() {
   if (!countdown) return;
   const remaining = launchDeadline - Date.now();
-
-  if (remaining <= 0) {
-    countdown.innerHTML = '<div class="campaign-ended">Condição encerrada</div>';
-    launchCampaign?.classList.add('ended');
-    renderPlans();
-    return;
-  }
-
+  if (remaining <= 0) { countdown.innerHTML = '<div class="campaign-ended">Condição encerrada</div>'; launchCampaign?.classList.add('ended'); renderPlans(); return; }
   const totalSeconds = Math.floor(remaining / 1000);
   const days = Math.floor(totalSeconds / 86400);
   const hours = Math.floor((totalSeconds % 86400) / 3600);
   const minutes = Math.floor((totalSeconds % 3600) / 60);
   const seconds = totalSeconds % 60;
-
-  countdown.innerHTML = `
-    <div class="time-unit"><strong>${pad(days)}</strong><span>dias</span></div><i>:</i>
-    <div class="time-unit"><strong>${pad(hours)}</strong><span>h</span></div><i>:</i>
-    <div class="time-unit"><strong>${pad(minutes)}</strong><span>min</span></div><i>:</i>
-    <div class="time-unit"><strong>${pad(seconds)}</strong><span>seg</span></div>
-  `;
+  countdown.innerHTML = `<div class="time-unit"><strong>${pad(days)}</strong><span>dias</span></div><i>:</i><div class="time-unit"><strong>${pad(hours)}</strong><span>h</span></div><i>:</i><div class="time-unit"><strong>${pad(minutes)}</strong><span>min</span></div><i>:</i><div class="time-unit"><strong>${pad(seconds)}</strong><span>seg</span></div>`;
 }
 
 function showToast(message) {
@@ -127,7 +108,7 @@ document.addEventListener('click', (event) => {
   if (!target) return;
   if (target.dataset.action === 'login') showToast('Login Firebase será conectado na próxima etapa.');
   if (target.dataset.action === 'subscribe') showToast(`Plano ${target.dataset.plan} selecionado. Checkout entra na próxima etapa.`);
-  if (target.dataset.action === 'creator') showToast('Creator selecionado. O contato comercial entra na próxima etapa.');
+  if (target.dataset.action === 'creator') showToast('Conte sua ideia para a NOT. O formulário de orçamento entra na próxima etapa.');
 });
 
 renderGames();
