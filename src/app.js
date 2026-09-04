@@ -1,4 +1,4 @@
-import { games, benefits, plans, launchEndsAt } from './data.js?v=8';
+import { games, benefits, plans, launchEndsAt } from './data.js?v=9';
 
 const gameGrid = document.querySelector('[data-game-grid]');
 const benefitList = document.querySelector('[data-benefit-list]');
@@ -75,7 +75,6 @@ function renderPlans() {
         ${priceMarkup}
         <p class="plan-description">${plan.description}</p>
         <div class="plan-features">${plan.features.map((feature) => `<span>${feature}</span>`).join('')}</div>
-        ${plan.commercial ? '<div class="creator-terms"><strong>Sem divisão de lucros.</strong><span>Uso do projeto em portfólio ou divulgação da NOT somente com autorização do cliente.</span></div>' : ''}
         <button class="primary-button" type="button" data-action="${plan.commercial ? 'creator' : 'subscribe'}" data-plan="${plan.name}">${plan.commercial ? 'Solicitar projeto' : `Escolher ${plan.name}`} <span>↗</span></button>
       </article>
     `;
