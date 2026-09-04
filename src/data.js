@@ -5,9 +5,9 @@ export const games = [
 ];
 
 export const benefits = [
-  { number: '01', title: 'Conteúdo organizado', description: 'Cada jogo, atualização e material premium fica separado para o usuário encontrar o que precisa sem navegar por páginas confusas.' },
-  { number: '02', title: 'Acesso protegido', description: 'A estrutura está preparada para que o conteúdo restrito seja liberado somente após autenticação via Firebase.' },
-  { number: '03', title: 'Experiência responsiva', description: 'O layout se adapta de celular a desktop sem depender de uma versão duplicada do site.' }
+  { number: '01', title: 'Tudo no lugar', description: 'Jogos, atualizações e benefícios organizados para você encontrar o que precisa sem perder tempo.' },
+  { number: '02', title: 'Acesso protegido', description: 'Conteúdos e benefícios ficam disponíveis apenas para contas com acesso autorizado.' },
+  { number: '03', title: 'Mobile + PC', description: 'Uma experiência pensada para funcionar bem no celular e no computador, sem versões separadas.' }
 ];
 
 export const launchEndsAt = '2026-11-01T00:00:00-03:00';
