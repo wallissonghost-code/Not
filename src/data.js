@@ -14,41 +14,48 @@ export const launchEndsAt = '2026-11-01T00:00:00-03:00';
 
 export const plans = [
   {
-    name: 'NORMAL',
-    launchPrice: '9,99',
-    regularPrice: '19,90',
-    suffix: '/ mês',
-    description: 'Para começar.',
-    features: ['Acesso a uma seleção de jogos', 'Conector NOT', 'Benefícios básicos'],
-    featured: false
+    name: 'NORMAL', launchPrice: '9,99', regularPrice: '19,90', suffix: '/ mês', description: 'Para começar.', featured: false,
+    features: [
+      { label: 'Acesso a uma seleção de jogos', included: true },
+      { label: 'Conector NOT', included: true },
+      { label: 'Benefícios básicos', included: true },
+      { label: 'Catálogo completo de jogos', included: false },
+      { label: 'Conector Plus', included: false },
+      { label: 'Benefícios exclusivos', included: false },
+      { label: 'Acesso antecipado', included: false },
+      { label: 'Prioridade em novidades', included: false }
+    ]
   },
   {
-    name: 'PLUS',
-    launchPrice: '20,00',
-    regularPrice: '34,90',
-    suffix: '/ mês',
-    description: 'Melhor custo-benefício para aproveitar a NOT completa.',
-    features: ['Todos os jogos', 'Conector Plus', 'Benefícios exclusivos', 'Melhor custo-benefício'],
-    featured: true,
-    badge: 'MAIS POPULAR'
+    name: 'PLUS', launchPrice: '20,00', regularPrice: '34,90', suffix: '/ mês', description: 'Melhor custo-benefício para aproveitar a NOT completa.', featured: true, badge: 'MAIS POPULAR',
+    features: [
+      { label: 'Acesso a uma seleção de jogos', included: true },
+      { label: 'Conector NOT', included: true },
+      { label: 'Benefícios básicos', included: true },
+      { label: 'Catálogo completo de jogos', included: true },
+      { label: 'Conector Plus', included: true },
+      { label: 'Benefícios exclusivos', included: true },
+      { label: 'Acesso antecipado', included: false },
+      { label: 'Prioridade em novidades', included: false }
+    ]
   },
   {
-    name: 'PREMIUM',
-    launchPrice: '39,99',
-    regularPrice: '54,90',
-    suffix: '/ mês',
-    description: 'Para quem quer tudo.',
-    features: ['Todos os jogos', 'Conector Plus', 'Acesso antecipado', 'Conteúdos e benefícios exclusivos', 'Prioridade em novidades'],
-    featured: false
+    name: 'PREMIUM', launchPrice: '39,99', regularPrice: '54,90', suffix: '/ mês', description: 'Para quem quer tudo.', featured: false,
+    features: [
+      { label: 'Acesso a uma seleção de jogos', included: true },
+      { label: 'Conector NOT', included: true },
+      { label: 'Benefícios básicos', included: true },
+      { label: 'Catálogo completo de jogos', included: true },
+      { label: 'Conector Plus', included: true },
+      { label: 'Benefícios exclusivos', included: true },
+      { label: 'Acesso antecipado', included: true },
+      { label: 'Prioridade em novidades', included: true }
+    ]
   },
   {
-    name: 'NOT CREATOR',
-    priceLabel: 'Orçamento por projeto',
-    headline: 'Seu jogo. Do seu jeito.',
+    name: 'NOT CREATOR', priceLabel: 'Orçamento por projeto', headline: 'Seu jogo. Do seu jeito.',
     description: 'Conte sua ideia e a equipe NOT desenvolve uma experiência web personalizada e pronta para sua live.',
     features: ['Jogo web personalizado', 'Mecânicas definidas com o criador', 'Integração com o Conector NOT', 'Configuração para transmissão', 'Testes e ajustes'],
-    featured: false,
-    commercial: true,
-    badge: 'PARA CRIADORES'
+    featured: false, commercial: true, badge: 'PARA CRIADORES'
   }
 ];
