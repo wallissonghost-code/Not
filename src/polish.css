@@ -65,6 +65,48 @@
   line-height: 1.65;
 }
 
+/* Carousel interaction states */
+.game-card,
+.plan-card {
+  transition: transform .24s ease, border-color .24s ease, box-shadow .24s ease, background .24s ease;
+  transform-origin: center center;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .game-card:hover,
+  .plan-card:not(.featured):not(.commercial):hover {
+    transform: translateY(-5px) scale(1.012);
+    border-color: rgba(255,255,255,.18);
+    box-shadow: 0 18px 42px rgba(0,0,0,.22);
+  }
+
+  .plan-card.featured:hover {
+    transform: translateY(-5px) scale(1.012);
+    border-color: rgba(184,255,61,.48);
+    box-shadow: 0 18px 44px rgba(0,0,0,.24), 0 0 28px rgba(184,255,61,.08);
+  }
+
+  .plan-card.commercial:hover {
+    transform: translateY(-5px) scale(1.012);
+    border-color: rgba(116,242,206,.42);
+    box-shadow: 0 18px 44px rgba(0,0,0,.24), 0 0 26px rgba(116,242,206,.07);
+  }
+}
+
+@media (hover: none), (pointer: coarse) {
+  .game-card:active,
+  .plan-card:active {
+    transform: scale(.994);
+  }
+
+  .game-card,
+  .plan-card,
+  .plan-card.featured,
+  .plan-card.commercial {
+    box-shadow: none;
+  }
+}
+
 .site-footer {
   margin-top: 54px;
   border-top: 1px solid var(--line);
