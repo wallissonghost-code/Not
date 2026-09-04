@@ -46,7 +46,7 @@ export const plans = [
     priceLabel: 'Orçamento por projeto',
     headline: 'Seu jogo. Do seu jeito.',
     description: 'Conte sua ideia e a equipe NOT desenvolve uma experiência web personalizada e pronta para sua live.',
-    features: ['Jogo web personalizado', 'Mecânicas definidas com o criador', 'Integração com o Conector NOT', 'Configuração para transmissão', 'Testes e ajustes', 'Projeto e conteúdo continuam sendo seus'],
+    features: ['Jogo web personalizado', 'Mecânicas definidas com o criador', 'Integração com o Conector NOT', 'Configuração para transmissão', 'Testes e ajustes'],
     featured: false,
     commercial: true,
     badge: 'PARA CRIADORES'
