@@ -5,12 +5,14 @@ async function collectLayoutProblems(page) {
     const body = document.body;
     const html = document.documentElement;
     const text = body.innerText || '';
-    const buttons = [...document.querySelectorAll('button, a.primary-button')];
     const cards = [...document.querySelectorAll('.plan-card')];
 
-    const clippedButtons = buttons.filter((el) => {
-      const r = el.getBoundingClientRect();
-      return r.width <= 0 || r.height <= 0 || r.left < -2 || r.right > innerWidth + 2;
+    const clippedButtons = cards.filter((card) => {
+      const button = card.querySelector('button, a.primary-button');
+      if (!button) return true;
+      const c = card.getBoundingClientRect();
+      const b = button.getBoundingClientRect();
+      return b.width <= 0 || b.height <= 0 || b.left < c.left - 2 || b.right > c.right + 2 || b.bottom > c.bottom + 2;
     }).length;
 
     const tinyCards = cards.filter((el) => {
@@ -47,7 +49,7 @@ test('não renderiza dados quebrados e mantém conteúdo essencial', async ({ pa
   expect(page.__runtimeErrors).toEqual([]);
 });
 
-test('layout não estoura a página nem corta CTAs', async ({ page }) => {
+test('layout não estoura a página nem corta CTAs dentro dos cards', async ({ page }) => {
   const result = await collectLayoutProblems(page);
   expect(result.pageOverflow).toBeFalsy();
   expect(result.clippedButtons).toBe(0);
@@ -57,10 +59,9 @@ test('layout não estoura a página nem corta CTAs', async ({ page }) => {
 test('cards de assinatura permanecem alinhados no mobile', async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== 'mobile-safari');
   const metrics = await page.evaluate(() => {
-    const cards = [...document.querySelectorAll('.plan-card')];
-    const subscriptionCards = cards.filter((card) => !card.classList.contains('commercial'));
-    const tops = subscriptionCards.map((card) => Math.round(card.getBoundingClientRect().top));
-    const bottoms = subscriptionCards.map((card) => Math.round(card.getBoundingClientRect().bottom));
+    const cards = [...document.querySelectorAll('.plan-card:not(.commercial)')];
+    const tops = cards.map((card) => Math.round(card.getBoundingClientRect().top));
+    const bottoms = cards.map((card) => Math.round(card.getBoundingClientRect().bottom));
     return { tops, bottoms };
   });
 
