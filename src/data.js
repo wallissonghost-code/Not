@@ -5,9 +5,9 @@ export const games = [
 ];
 
 export const benefits = [
-  { number: '01', title: 'Tudo no lugar', description: 'Jogos, atualizações e benefícios organizados para você encontrar o que precisa sem perder tempo.' },
-  { number: '02', title: 'Acesso protegido', description: 'Conteúdos e benefícios ficam disponíveis apenas para contas com acesso autorizado.' },
-  { number: '03', title: 'Mobile + PC', description: 'Uma experiência pensada para funcionar bem no celular e no computador, sem versões separadas.' }
+  { number: '01', title: 'Gameplay interativa', description: 'Transforme a audiência em parte da partida com experiências pensadas para interação durante a live.' },
+  { number: '02', title: 'Mais retenção. Mais receita.', description: 'Use gameplay como conteúdo para manter o público participando por mais tempo e criar novas oportunidades de monetização.' },
+  { number: '03', title: 'Conector NOT', description: 'A tecnologia que conecta live, audiência e jogo. Nos planos compatíveis, o Conector AutoPlay mantém a gameplay rodando automaticamente.' }
 ];
 
 export const launchEndsAt = '2026-11-01T00:00:00-03:00';
@@ -50,8 +50,8 @@ export const plans = [
     ]
   },
   {
-    name: 'NOT CREATOR', priceLabel: 'Orçamento por projeto', headline: 'Seu jogo. Do seu jeito.',
-    description: 'Conte sua ideia e a equipe NOT desenvolve uma experiência web personalizada e pronta para sua live.',
+    name: 'NOT CREATOR', priceLabel: 'Orçamento por projeto', headline: 'Seu conteúdo. Seu jogo.',
+    description: 'Transforme sua ideia em uma experiência interativa criada para sua audiência, sua live e sua forma de monetizar.',
     features: ['Jogo web personalizado', 'Mecânicas definidas com o criador', 'Integração com o Conector NOT', 'Configuração para transmissão', 'Testes e ajustes'],
     featured: false, commercial: true, badge: 'PARA CRIADORES'
   }
