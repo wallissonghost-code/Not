@@ -27,7 +27,7 @@ async function collectLayoutProblems(page) {
       tinyCards,
       cardCount: cards.length,
       normalHasLabels: text.includes('Acesso a uma seleção de jogos') && text.includes('Catálogo completo de jogos'),
-      creatorVisible: text.includes('Seu jogo. Do seu jeito.') && text.includes('Solicitar projeto')
+      creatorVisible: text.includes('Seu conteúdo. Seu jogo.') && text.includes('Solicitar projeto')
     };
   });
 }
