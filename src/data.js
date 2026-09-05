@@ -1,4 +1,4 @@
-import { caosLiveCover } from './caos-live-cover.js?v=17';
+import { caosLiveCover } from './caos-live-cover.js?v=18';
 
 export const games = [
   { id: '01', title: 'Caos Live', genre: '<span>Sobrevivência / Mundo aberto</span><small>Você começa apenas com uma arma e evolui durante a partida, desbloqueando novas skills e mecânicas de combate. O mapa é infinito, com surgimento contínuo de mobs, eventos de XP em dobro, meteoros e habilidades como Necromante e Fênix.</small>', tag: 'DESTAQUE', symbol: `<img src="${caosLiveCover}" alt="Capa do jogo Caos Live">`, accent: '#b8ff3d' },
