@@ -1,0 +1,60 @@
+.game-card-symbol img {
+  width: calc(100% + 44px);
+  height: 205px;
+  margin-inline: -22px;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+.game-card footer > div {
+  min-width: 0;
+  flex: 1;
+}
+
+.game-card p span {
+  display: block;
+  color: #d7dce5;
+  font-size: 12px;
+  font-weight: 600;
+  margin-bottom: 7px;
+}
+
+.game-card p small {
+  display: block;
+  max-width: 290px;
+  color: var(--muted);
+  font-size: 10px;
+  line-height: 1.5;
+  font-weight: 400;
+}
+
+.game-card:has(.game-card-symbol img) {
+  min-height: 430px;
+}
+
+.game-card:has(.game-card-symbol img) .game-card-symbol {
+  height: 205px;
+  margin-top: 12px;
+  overflow: hidden;
+  border-radius: 14px;
+}
+
+@media (max-width: 760px) {
+  .game-card:has(.game-card-symbol img) {
+    min-height: 390px;
+  }
+
+  .game-card-symbol img {
+    height: 185px;
+  }
+
+  .game-card:has(.game-card-symbol img) .game-card-symbol {
+    height: 185px;
+  }
+
+  .game-card p small {
+    max-width: 260px;
+    font-size: 9.5px;
+  }
+}
