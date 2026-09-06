@@ -1,4 +1,5 @@
 import { games, benefits, plans, launchEndsAt } from './data.js?v=18';
+import { heroVisual } from './hero-visual.js?v=19';
 
 const gameGrid = document.querySelector('[data-game-grid]');
 const benefitList = document.querySelector('[data-benefit-list]');
@@ -8,6 +9,7 @@ const toast = document.querySelector('[data-toast]');
 const year = document.querySelector('[data-year]');
 const countdown = document.querySelector('[data-countdown]');
 const launchCampaign = document.querySelector('[data-launch-campaign]');
+const heroVisualImage = document.querySelector('[data-hero-visual]');
 
 const faqs = [
   { q: 'O que é a NOT?', a: 'A NOT é uma plataforma de acesso premium a jogos e experiências interativas, com planos para jogadores e uma área Creator para projetos personalizados.' },
@@ -21,6 +23,7 @@ const faqs = [
 ];
 
 if (year) year.textContent = new Date().getFullYear();
+if (heroVisualImage) heroVisualImage.src = heroVisual;
 
 let lastTouchEnd = 0;
 document.addEventListener('gesturestart', (event) => event.preventDefault(), { passive: false });
