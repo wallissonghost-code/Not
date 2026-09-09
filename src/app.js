@@ -1,7 +1,7 @@
 import { benefits, plans, launchEndsAt } from './data.js?v=18';
 import { renderCatalog, selectCatalogGame } from './catalog.js?v=1';
 import { renderBenefits } from './benefits.js?v=1';
-import { renderFaqs, toggleFaq } from './faq.js?v=1';
+import { renderFaqs, selectFaqCategory, toggleFaq } from './faq.js?v=1';
 import { createPlansController } from './plans.js?v=1';
 import { installTouchGuards, createToast } from './ui.js?v=1';
 
@@ -20,6 +20,12 @@ function handleClick(event) {
   const gameButton = event.target.closest('[data-select-game]');
   if (gameButton) {
     selectCatalogGame(gameGrid, Number(gameButton.dataset.selectGame));
+    return;
+  }
+
+  const faqCategory = event.target.closest('[data-faq-category]');
+  if (faqCategory) {
+    selectFaqCategory(faqList, faqCategory.dataset.faqCategory);
     return;
   }
 
