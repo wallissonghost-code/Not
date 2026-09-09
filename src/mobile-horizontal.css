@@ -13,7 +13,7 @@
   }
 
   .game-grid { align-items: flex-start; }
-  .plan-grid { align-items: stretch; }
+  .plan-grid { align-items: flex-start; }
   .game-grid::-webkit-scrollbar, .plan-grid::-webkit-scrollbar { display: none; }
 
   .game-card, .plan-card {
@@ -26,27 +26,27 @@
   .game-card { min-height: 330px; }
 
   .plan-card {
-    min-height: 620px;
+    min-height: 0;
     height: auto;
-    align-self: stretch;
-    padding: 24px;
+    align-self: flex-start;
+    padding: 22px;
   }
 
   .plan-card .plan-description {
-    min-height: 46px;
-    margin-bottom: 0;
+    min-height: 0;
+    margin: 8px 0 0;
     font-size: 12.5px;
-    line-height: 1.5;
+    line-height: 1.45;
   }
 
   .plan-card .plan-features {
     gap: 0;
-    margin: 20px 0 22px;
+    margin: 14px 0 18px;
     font-size: 12.5px;
   }
 
   .plan-card .feature-item {
-    min-height: 38px;
+    min-height: 36px;
     display: flex;
     align-items: center;
     border-bottom: 1px solid rgba(255,255,255,.045);
@@ -57,19 +57,19 @@
   .plan-card .feature-item.unavailable::before { color: rgba(142,150,165,.42); }
 
   .plan-card .primary-button {
-    margin-top: auto;
-    min-height: 52px;
-    padding-block: 13px;
+    margin-top: 8px;
+    min-height: 50px;
+    padding-block: 12px;
   }
 
   .plan-card.commercial {
-    padding: 28px 24px;
+    padding: 24px 22px;
   }
 
-  .plan-card.commercial .creator-symbol { margin-top: 22px; }
-  .plan-card.commercial .creator-headline { margin-top: 22px; font-size: 27px; line-height: 1.04; }
-  .plan-card.commercial .commercial-price { margin-top: 10px; }
-  .plan-card.commercial .plan-description { margin-top: 10px; min-height: 0; line-height: 1.6; }
-  .plan-card.commercial .plan-features { margin-top: 25px; margin-bottom: 28px; }
-  .plan-card.commercial .feature-item { min-height: 42px; }
+  .plan-card.commercial .creator-symbol { margin-top: 18px; }
+  .plan-card.commercial .creator-headline { margin-top: 18px; font-size: 27px; line-height: 1.04; }
+  .plan-card.commercial .commercial-price { margin-top: 9px; }
+  .plan-card.commercial .plan-description { margin-top: 9px; min-height: 0; line-height: 1.5; }
+  .plan-card.commercial .plan-features { margin-top: 18px; margin-bottom: 18px; }
+  .plan-card.commercial .feature-item { min-height: 38px; }
 }
