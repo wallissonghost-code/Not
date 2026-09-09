@@ -33,7 +33,8 @@ export function createPlansController({ planGrid, plans, launchEndsAt, showToast
       } else {
         price = `<div class="regular-entry-price"><span class="currency">R$</span><strong>${plan.regularPrice}</strong><small>${plan.suffix}</small></div><span class="regular-entry-caption">valor regular</span>`;
       }
-      return `<article class="plan-card ${plan.featured ? 'featured' : ''} ${plan.commercial ? 'commercial' : ''} ${offerRevealed && active && !plan.commercial ? 'offer-active' : ''}"><div class="plan-label">${plan.name}${plan.badge ? `<span>${plan.badge}</span>` : ''}</div>${price}<p class="plan-description">${plan.description}</p><div class="plan-features">${renderFeatures(plan)}</div><button class="primary-button" type="button" data-action="${plan.commercial ? 'creator' : 'subscribe'}" data-plan="${plan.name}">${plan.commercial ? 'Solicitar projeto' : `Escolher ${plan.name}`} <span>↗</span></button></article>`;
+      const toneClass = plan.tone ? `plan-${plan.tone}` : '';
+      return `<article class="plan-card ${toneClass} ${plan.featured ? 'featured' : ''} ${plan.commercial ? 'commercial' : ''} ${offerRevealed && active && !plan.commercial ? 'offer-active' : ''}"><div class="plan-label">${plan.name}${plan.badge ? `<span>${plan.badge}</span>` : ''}</div>${price}<p class="plan-description">${plan.description}</p><div class="plan-features">${renderFeatures(plan)}</div><button class="primary-button" type="button" data-action="${plan.commercial ? 'creator' : 'subscribe'}" data-plan="${plan.name}">${plan.commercial ? 'Solicitar projeto' : `Escolher ${plan.name}`} <span>↗</span></button></article>`;
     }).join('');
   }
 
