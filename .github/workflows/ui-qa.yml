@@ -29,8 +29,8 @@ jobs:
       - name: Install Chromium
         run: npx playwright install chromium
 
-      - name: Run Android and desktop QA
-        run: npx playwright test --project=mobile-android --project=desktop-chrome
+      - name: Run responsive QA
+        run: npx playwright test --project=mobile-android --project=tablet-chrome --project=desktop-chrome
 
       - name: Upload QA report on failure
         if: failure()
