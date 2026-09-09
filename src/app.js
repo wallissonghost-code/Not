@@ -2,6 +2,7 @@ import { benefits, plans, launchEndsAt } from './data.js?v=18';
 import { renderCatalog, selectCatalogGame } from './catalog.js?v=1';
 import { renderFaqs, toggleFaq } from './faq.js?v=1';
 import { createPlansController } from './plans.js?v=1';
+import { installTouchGuards, createToast } from './ui.js?v=1';
 
 const gameGrid = document.querySelector('[data-game-grid]');
 const benefitList = document.querySelector('[data-benefit-list]');
@@ -11,30 +12,7 @@ const toast = document.querySelector('[data-toast]');
 const year = document.querySelector('[data-year]');
 
 if (year) year.textContent = new Date().getFullYear();
-
-function installTouchGuards() {
-  let lastTouchEnd = 0;
-  document.addEventListener('gesturestart', event => event.preventDefault(), { passive: false });
-  document.addEventListener('gesturechange', event => event.preventDefault(), { passive: false });
-  document.addEventListener('gestureend', event => event.preventDefault(), { passive: false });
-  document.addEventListener('touchmove', event => {
-    if (event.touches.length > 1) event.preventDefault();
-  }, { passive: false });
-  document.addEventListener('touchend', event => {
-    const now = Date.now();
-    if (now - lastTouchEnd <= 300) event.preventDefault();
-    lastTouchEnd = now;
-  }, { passive: false });
-  document.addEventListener('dblclick', event => event.preventDefault());
-}
-
-function showToast(message) {
-  if (!toast) return;
-  toast.textContent = message;
-  toast.classList.add('visible');
-  clearTimeout(showToast.timer);
-  showToast.timer = setTimeout(() => toast.classList.remove('visible'), 2600);
-}
+const showToast = createToast(toast);
 
 function renderBenefits() {
   if (!benefitList) return;
