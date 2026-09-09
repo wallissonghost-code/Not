@@ -6,8 +6,8 @@ const planGrid = document.querySelector('[data-plan-grid]');
 const faqList = document.querySelector('[data-faq-list]');
 const toast = document.querySelector('[data-toast]');
 const year = document.querySelector('[data-year]');
-const countdown = document.querySelector('[data-countdown]');
-const launchCampaign = document.querySelector('[data-launch-campaign]');
+const offerNotice = document.querySelector('[data-offer-notice]');
+const offerTime = document.querySelector('[data-offer-time]');
 
 const faqs = [
   { q: 'O que é a NOT?', a: 'A NOT é uma plataforma de acesso premium a jogos e experiências interativas, com planos para jogadores e uma área Creator para projetos personalizados.' },
@@ -73,17 +73,26 @@ function renderPlans() {
   }).join('');
 }
 
-function pad(value) { return String(value).padStart(2, '0'); }
-function updateCountdown() {
-  if (!countdown) return;
+function updateOfferTime() {
+  if (!offerTime) return;
   const remaining = launchDeadline - Date.now();
-  if (remaining <= 0) { countdown.innerHTML = '<div class="campaign-ended">Condição encerrada</div>'; launchCampaign?.classList.add('ended'); renderPlans(); return; }
-  const totalSeconds = Math.floor(remaining / 1000);
-  const days = Math.floor(totalSeconds / 86400);
-  const hours = Math.floor((totalSeconds % 86400) / 3600);
-  const minutes = Math.floor((totalSeconds % 3600) / 60);
-  const seconds = totalSeconds % 60;
-  countdown.innerHTML = `<div class="time-unit"><strong>${pad(days)}</strong><span>dias</span></div><i>:</i><div class="time-unit"><strong>${pad(hours)}</strong><span>h</span></div><i>:</i><div class="time-unit"><strong>${pad(minutes)}</strong><span>min</span></div><i>:</i><div class="time-unit"><strong>${pad(seconds)}</strong><span>seg</span></div>`;
+  if (remaining <= 0) { offerNotice?.remove(); return; }
+  const totalMinutes = Math.floor(remaining / 60000);
+  const days = Math.floor(totalMinutes / 1440);
+  const hours = Math.floor((totalMinutes % 1440) / 60);
+  if (days > 0) offerTime.textContent = `${days} ${days === 1 ? 'dia' : 'dias'} e ${hours}h restantes`;
+  else if (hours > 0) offerTime.textContent = `${hours}h restantes`;
+  else offerTime.textContent = `${Math.max(1, totalMinutes)} min restantes`;
+}
+
+function revealOfferNotice() {
+  if (!offerNotice || !isLaunchActive()) return;
+  updateOfferTime();
+  window.setTimeout(() => {
+    offerNotice.classList.add('visible');
+    window.clearTimeout(revealOfferNotice.hideTimer);
+    revealOfferNotice.hideTimer = window.setTimeout(() => offerNotice.classList.remove('visible'), 8500);
+  }, 3200);
 }
 
 function showToast(message) {
@@ -95,6 +104,9 @@ function showToast(message) {
 }
 
 document.addEventListener('click', (event) => {
+  const closeOffer = event.target.closest('[data-offer-close]');
+  if (closeOffer) { offerNotice?.classList.remove('visible'); window.clearTimeout(revealOfferNotice.hideTimer); return; }
+
   const faqButton = event.target.closest('.faq-question');
   if (faqButton) {
     const item = faqButton.closest('.faq-item');
@@ -108,10 +120,7 @@ document.addEventListener('click', (event) => {
   }
 
   const footerToggle = event.target.closest('.footer-toggle');
-  if (footerToggle) {
-    footerToggle.closest('.footer-group')?.classList.toggle('open');
-    return;
-  }
+  if (footerToggle) { footerToggle.closest('.footer-group')?.classList.toggle('open'); return; }
 
   const target = event.target.closest('[data-action]');
   if (!target) return;
@@ -124,5 +133,5 @@ renderGames();
 renderBenefits();
 renderPlans();
 renderFaqs();
-updateCountdown();
-setInterval(updateCountdown, 1000);
+revealOfferNotice();
+setInterval(updateOfferTime, 60000);
