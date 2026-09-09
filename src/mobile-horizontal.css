@@ -1,74 +1,24 @@
-@media (max-width: 620px) {
-  .game-grid,
-  .plan-grid {
-    display: flex;
-    gap: 12px;
-    overflow-x: auto;
-    overflow-y: hidden;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-    padding: 2px 14px 12px 0;
-    margin-right: -14px;
+/* Mobile horizontal layout is reserved for the game catalog.
+   Subscription cards are owned by launch-offer.css on every breakpoint. */
+@media (max-width:620px){
+  .game-grid{
+    display:flex;
+    gap:14px;
+    overflow-x:auto;
+    overflow-y:hidden;
+    scroll-snap-type:x mandatory;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:none;
+    padding:2px 14px 14px 0;
+    margin-right:-14px;
+    align-items:flex-start;
   }
-
-  .game-grid { align-items: flex-start; }
-  .plan-grid { align-items: stretch; }
-  .game-grid::-webkit-scrollbar, .plan-grid::-webkit-scrollbar { display: none; }
-
-  .game-card { flex: 0 0 min(82vw, 340px); width: min(82vw, 340px); scroll-snap-align: start; }
-  .plan-card { flex: 0 0 min(76vw, 300px); width: min(76vw, 300px); scroll-snap-align: start; }
-
-  .game-card:last-child, .plan-card:last-child { grid-column: auto; }
-  .game-card { min-height: 330px; }
-
-  .plan-card,
-  .plan-card.commercial {
-    box-sizing: border-box;
-    min-height: 560px;
-    height: 560px;
-    align-self: stretch;
-    padding: 18px;
-    display: flex;
-    flex-direction: column;
+  .game-grid::-webkit-scrollbar{display:none}
+  .game-card{
+    flex:0 0 min(82vw,340px);
+    width:min(82vw,340px);
+    min-height:330px;
+    scroll-snap-align:start;
   }
-
-  .plan-card .plan-description {
-    min-height: 32px;
-    margin: 6px 0 0;
-    font-size: 11.5px;
-    line-height: 1.4;
-  }
-
-  .plan-card .plan-features {
-    gap: 0;
-    margin: 10px 0 14px;
-    font-size: 11.5px;
-  }
-
-  .plan-card .feature-item {
-    min-height: 31px;
-    display: flex;
-    align-items: center;
-    border-bottom: 1px solid rgba(255,255,255,.045);
-  }
-
-  .plan-card .feature-item:last-child { border-bottom: 0; }
-  .plan-card .feature-item.unavailable { color: rgba(142,150,165,.46); }
-  .plan-card .feature-item.unavailable::before { color: rgba(142,150,165,.42); }
-
-  .plan-card .primary-button {
-    margin-top: auto;
-    min-height: 44px;
-    padding-block: 10px;
-    font-size: 12px;
-    flex: 0 0 auto;
-  }
-
-  .plan-card.commercial .creator-symbol { margin-top: 14px; width: 44px; height: 44px; }
-  .plan-card.commercial .creator-headline { margin-top: 14px; font-size: 23px; line-height: 1.03; }
-  .plan-card.commercial .commercial-price { margin-top: 7px; font-size: 10px; }
-  .plan-card.commercial .plan-description { margin-top: 7px; min-height: 46px; line-height: 1.4; }
-  .plan-card.commercial .plan-features { margin-top: 12px; margin-bottom: 14px; }
-  .plan-card.commercial .feature-item { min-height: 31px; }
+  .game-card:last-child{grid-column:auto}
 }
