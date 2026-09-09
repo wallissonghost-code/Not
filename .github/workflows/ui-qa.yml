@@ -27,7 +27,7 @@ jobs:
         run: npm install
 
       - name: Install Playwright browsers
-        run: npx playwright install --with-deps chromium webkit
+        run: npx playwright install chromium webkit
 
       - name: Run mobile and desktop QA
         run: npm run test:ui
