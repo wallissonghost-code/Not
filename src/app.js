@@ -6,8 +6,6 @@ const planGrid = document.querySelector('[data-plan-grid]');
 const faqList = document.querySelector('[data-faq-list]');
 const toast = document.querySelector('[data-toast]');
 const year = document.querySelector('[data-year]');
-const offerNotice = document.querySelector('[data-offer-notice]');
-const offerTime = document.querySelector('[data-offer-time]');
 
 const faqs = [
   { q: 'O que é a NOT?', a: 'A NOT é uma plataforma de acesso premium a jogos e experiências interativas, com planos para jogadores e uma área Creator para projetos personalizados.' },
@@ -32,6 +30,7 @@ document.addEventListener('dblclick', (event) => event.preventDefault());
 
 const launchDeadline = new Date(launchEndsAt).getTime();
 const isLaunchActive = () => Date.now() < launchDeadline;
+let offerRevealed = false;
 
 function renderGames() {
   if (!gameGrid) return;
@@ -54,6 +53,16 @@ function discountPercent(regularPrice, launchPrice) {
   return Math.round((1 - launch / regular) * 100);
 }
 
+function countdownMarkup() {
+  const remaining = Math.max(0, launchDeadline - Date.now());
+  const totalSeconds = Math.floor(remaining / 1000);
+  const days = Math.floor(totalSeconds / 86400);
+  const hours = Math.floor((totalSeconds % 86400) / 3600);
+  const minutes = Math.floor((totalSeconds % 3600) / 60);
+  const seconds = totalSeconds % 60;
+  return `<div class="card-offer-timer"><span class="timer-label"><i></i> oferta por tempo limitado</span><div class="timer-values"><b>${days}</b><small>dias</small><b>${hours}</b><small>h</small><b>${minutes}</b><small>min</small><b>${seconds}</b><small>seg</small></div></div>`;
+}
+
 function renderPlanFeatures(plan) {
   if (plan.commercial) return plan.features.map((feature) => `<span class="feature-item included">${feature}</span>`).join('');
   return plan.features.map((feature) => `<span class="feature-item ${feature.included ? 'included' : 'unavailable'}">${feature.label}</span>`).join('');
@@ -64,35 +73,37 @@ function renderPlans() {
   const launchActive = isLaunchActive();
   planGrid.innerHTML = plans.map((plan) => {
     let priceMarkup = '';
-    if (plan.commercial) priceMarkup = `<div class="creator-symbol" aria-hidden="true">&lt;/&gt;</div><h3 class="creator-headline">${plan.headline}</h3><div class="commercial-price">${plan.priceLabel}</div>`;
-    else if (launchActive) {
+    if (plan.commercial) {
+      priceMarkup = `<div class="creator-symbol" aria-hidden="true">&lt;/&gt;</div><h3 class="creator-headline">${plan.headline}</h3><div class="commercial-price">${plan.priceLabel}</div>`;
+    } else if (launchActive && offerRevealed) {
       const discount = discountPercent(plan.regularPrice, plan.launchPrice);
-      priceMarkup = `<div class="price-offer-row"><span class="regular-price">de R$ ${plan.regularPrice}</span><span class="discount-pill">-${discount}%</span></div><div class="launch-price-row"><span class="currency">R$</span><strong>${plan.launchPrice}</strong><small>${plan.suffix}</small></div><span class="launch-price-caption">preço de lançamento</span>`;
-    } else priceMarkup = `<div class="launch-price-row"><span class="currency">R$</span><strong>${plan.regularPrice}</strong><small>${plan.suffix}</small></div>`;
-    return `<article class="plan-card ${plan.featured ? 'featured' : ''} ${plan.commercial ? 'commercial' : ''}"><div class="plan-label">${plan.name}${plan.badge ? `<span>${plan.badge}</span>` : ''}</div>${priceMarkup}<p class="plan-description">${plan.description}</p><div class="plan-features">${renderPlanFeatures(plan)}</div><button class="primary-button" type="button" data-action="${plan.commercial ? 'creator' : 'subscribe'}" data-plan="${plan.name}">${plan.commercial ? 'Solicitar projeto' : `Escolher ${plan.name}`} <span>↗</span></button></article>`;
+      priceMarkup = `<div class="offer-activated"><i></i> OFERTA ATIVADA</div><div class="price-offer-row"><span class="regular-price">R$ ${plan.regularPrice}</span><span class="discount-pill">-${discount}%</span></div><div class="launch-price-row price-reveal"><span class="currency">R$</span><strong>${plan.launchPrice}</strong><small>${plan.suffix}</small></div>${countdownMarkup()}`;
+    } else {
+      priceMarkup = `<div class="regular-entry-price"><span class="currency">R$</span><strong>${plan.regularPrice}</strong><small>${plan.suffix}</small></div><span class="regular-entry-caption">valor regular</span>`;
+    }
+    return `<article class="plan-card ${plan.featured ? 'featured' : ''} ${plan.commercial ? 'commercial' : ''} ${offerRevealed && launchActive && !plan.commercial ? 'offer-active' : ''}"><div class="plan-label">${plan.name}${plan.badge ? `<span>${plan.badge}</span>` : ''}</div>${priceMarkup}<p class="plan-description">${plan.description}</p><div class="plan-features">${renderPlanFeatures(plan)}</div><button class="primary-button" type="button" data-action="${plan.commercial ? 'creator' : 'subscribe'}" data-plan="${plan.name}">${plan.commercial ? 'Solicitar projeto' : `Escolher ${plan.name}`} <span>↗</span></button></article>`;
   }).join('');
 }
 
-function updateOfferTime() {
-  if (!offerTime) return;
-  const remaining = launchDeadline - Date.now();
-  if (remaining <= 0) { offerNotice?.remove(); return; }
-  const totalMinutes = Math.floor(remaining / 60000);
-  const days = Math.floor(totalMinutes / 1440);
-  const hours = Math.floor((totalMinutes % 1440) / 60);
-  if (days > 0) offerTime.textContent = `${days} ${days === 1 ? 'dia' : 'dias'} e ${hours}h restantes`;
-  else if (hours > 0) offerTime.textContent = `${hours}h restantes`;
-  else offerTime.textContent = `${Math.max(1, totalMinutes)} min restantes`;
+function revealOfferInCards() {
+  if (!isLaunchActive()) return;
+  window.setTimeout(() => {
+    offerRevealed = true;
+    renderPlans();
+  }, 1450);
 }
 
-function revealOfferNotice() {
-  if (!offerNotice || !isLaunchActive()) return;
-  updateOfferTime();
-  window.setTimeout(() => {
-    offerNotice.classList.add('visible');
-    window.clearTimeout(revealOfferNotice.hideTimer);
-    revealOfferNotice.hideTimer = window.setTimeout(() => offerNotice.classList.remove('visible'), 8500);
-  }, 3200);
+function updateCardCountdowns() {
+  if (!offerRevealed || !isLaunchActive()) return;
+  document.querySelectorAll('.card-offer-timer').forEach((timer) => {
+    const remaining = Math.max(0, launchDeadline - Date.now());
+    const totalSeconds = Math.floor(remaining / 1000);
+    const days = Math.floor(totalSeconds / 86400);
+    const hours = Math.floor((totalSeconds % 86400) / 3600);
+    const minutes = Math.floor((totalSeconds % 3600) / 60);
+    const seconds = totalSeconds % 60;
+    timer.querySelector('.timer-values').innerHTML = `<b>${days}</b><small>dias</small><b>${hours}</b><small>h</small><b>${minutes}</b><small>min</small><b>${seconds}</b><small>seg</small>`;
+  });
 }
 
 function showToast(message) {
@@ -104,9 +115,6 @@ function showToast(message) {
 }
 
 document.addEventListener('click', (event) => {
-  const closeOffer = event.target.closest('[data-offer-close]');
-  if (closeOffer) { offerNotice?.classList.remove('visible'); window.clearTimeout(revealOfferNotice.hideTimer); return; }
-
   const faqButton = event.target.closest('.faq-question');
   if (faqButton) {
     const item = faqButton.closest('.faq-item');
@@ -118,10 +126,8 @@ document.addEventListener('click', (event) => {
     if (willOpen) { item.classList.add('open'); faqButton.setAttribute('aria-expanded', 'true'); }
     return;
   }
-
   const footerToggle = event.target.closest('.footer-toggle');
   if (footerToggle) { footerToggle.closest('.footer-group')?.classList.toggle('open'); return; }
-
   const target = event.target.closest('[data-action]');
   if (!target) return;
   if (target.dataset.action === 'login') showToast('Login Firebase será conectado na próxima etapa.');
@@ -133,5 +139,5 @@ renderGames();
 renderBenefits();
 renderPlans();
 renderFaqs();
-revealOfferNotice();
-setInterval(updateOfferTime, 60000);
+revealOfferInCards();
+setInterval(updateCardCountdowns, 1000);
