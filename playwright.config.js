@@ -16,8 +16,8 @@ export default defineConfig({
     reuseExistingServer: true
   },
   projects: [
-    { name: 'mobile-safari', use: { ...devices['iPhone 13'] } },
     { name: 'mobile-android', use: { ...devices['Pixel 7'] } },
+    { name: 'tablet-chrome', use: { ...devices['Desktop Chrome'], viewport: { width: 1024, height: 1366 }, deviceScaleFactor: 1 } },
     { name: 'desktop-chrome', use: { ...devices['Desktop Chrome'] } }
   ]
 });
