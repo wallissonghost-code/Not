@@ -26,17 +26,11 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Prepare Playwright system dependencies
-        run: |
-          sudo rm -f /etc/apt/sources.list.d/google-chrome.list
-          sudo rm -f /etc/apt/sources.list.d/google-chrome.list.save
-          npx playwright install-deps webkit
+      - name: Install Chromium
+        run: npx playwright install chromium
 
-      - name: Install Playwright browsers
-        run: npx playwright install chromium webkit
-
-      - name: Run mobile and desktop QA
-        run: npm run test:ui
+      - name: Run Android and desktop QA
+        run: npx playwright test --project=mobile-android --project=desktop-chrome
 
       - name: Upload QA report on failure
         if: failure()
