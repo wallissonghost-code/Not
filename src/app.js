@@ -1,5 +1,6 @@
 import { benefits, plans, launchEndsAt } from './data.js?v=18';
 import { renderCatalog, selectCatalogGame } from './catalog.js?v=1';
+import { renderBenefits } from './benefits.js?v=1';
 import { renderFaqs, toggleFaq } from './faq.js?v=1';
 import { createPlansController } from './plans.js?v=1';
 import { installTouchGuards, createToast } from './ui.js?v=1';
@@ -13,12 +14,6 @@ const year = document.querySelector('[data-year]');
 
 if (year) year.textContent = new Date().getFullYear();
 const showToast = createToast(toast);
-
-function renderBenefits() {
-  if (!benefitList) return;
-  benefitList.innerHTML = benefits.map(item => `<article class="benefit-item"><span class="benefit-number">${item.number}</span><div><h3>${item.title}</h3><p>${item.description}</p></div></article>`).join('');
-}
-
 const plansController = createPlansController({ planGrid, plans, launchEndsAt, showToast });
 
 function handleClick(event) {
@@ -53,7 +48,7 @@ function handleClick(event) {
 
 installTouchGuards();
 renderCatalog(gameGrid);
-renderBenefits();
+renderBenefits(benefitList, benefits);
 renderFaqs(faqList);
 plansController.start();
 document.addEventListener('click', handleClick);
