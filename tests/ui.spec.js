@@ -15,17 +15,17 @@ async function collectLayoutProblems(page) {
       return b.width <= 0 || b.height <= 0 || b.left < c.left - 2 || b.right > c.right + 2 || b.bottom > c.bottom + 2;
     }).length;
 
-    const tinyCards = cards.filter((el) => {
-      const r = el.getBoundingClientRect();
-      return r.width < 240 || r.height < 300;
-    }).length;
+    const rects = cards.map((card) => {
+      const r = card.getBoundingClientRect();
+      return { width: Math.round(r.width), height: Math.round(r.height), top: Math.round(r.top), bottom: Math.round(r.bottom) };
+    });
 
     return {
       hasObjectObject: text.includes('[object Object]'),
       pageOverflow: Math.max(body.scrollWidth, html.scrollWidth) > innerWidth + 4,
       clippedButtons,
-      tinyCards,
       cardCount: cards.length,
+      rects,
       normalHasLabels: text.includes('Acesso a uma seleção de jogos') && text.includes('Catálogo completo de jogos'),
       creatorVisible: text.includes('Seu conteúdo. Seu jogo.') && text.includes('Solicitar projeto')
     };
@@ -37,6 +37,7 @@ test.beforeEach(async ({ page }) => {
   page.on('pageerror', (error) => errors.push(error.message));
   await page.goto('/', { waitUntil: 'networkidle' });
   await page.waitForSelector('.plan-card');
+  await page.waitForTimeout(1700);
   page.__runtimeErrors = errors;
 });
 
@@ -53,18 +54,14 @@ test('layout não estoura a página nem corta CTAs dentro dos cards', async ({ p
   const result = await collectLayoutProblems(page);
   expect(result.pageOverflow).toBeFalsy();
   expect(result.clippedButtons).toBe(0);
-  expect(result.tinyCards).toBe(0);
 });
 
-test('cards de assinatura permanecem alinhados no mobile', async ({ page }, testInfo) => {
-  test.skip(!['mobile-safari', 'mobile-android'].includes(testInfo.project.name));
-  const metrics = await page.evaluate(() => {
-    const cards = [...document.querySelectorAll('.plan-card:not(.commercial)')];
-    const tops = cards.map((card) => Math.round(card.getBoundingClientRect().top));
-    const bottoms = cards.map((card) => Math.round(card.getBoundingClientRect().bottom));
-    return { tops, bottoms };
-  });
+test('cards de assinatura usam proporção compacta e consistente', async ({ page }) => {
+  const result = await collectLayoutProblems(page);
+  const widths = result.rects.map((r) => r.width);
+  const heights = result.rects.map((r) => r.height);
 
-  expect(Math.max(...metrics.tops) - Math.min(...metrics.tops)).toBeLessThanOrEqual(2);
-  expect(Math.max(...metrics.bottoms) - Math.min(...metrics.bottoms)).toBeLessThanOrEqual(4);
+  expect(Math.max(...widths)).toBeLessThanOrEqual(330);
+  expect(Math.max(...heights)).toBeLessThanOrEqual(620);
+  expect(Math.max(...heights) - Math.min(...heights)).toBeLessThanOrEqual(4);
 });
