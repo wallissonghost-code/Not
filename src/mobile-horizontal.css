@@ -13,7 +13,7 @@
   }
 
   .game-grid { align-items: flex-start; }
-  .plan-grid { align-items: flex-start; }
+  .plan-grid { align-items: stretch; }
   .game-grid::-webkit-scrollbar, .plan-grid::-webkit-scrollbar { display: none; }
 
   .game-card, .plan-card {
@@ -25,15 +25,19 @@
   .game-card:last-child, .plan-card:last-child { grid-column: auto; }
   .game-card { min-height: 330px; }
 
-  .plan-card {
-    min-height: 0;
-    height: auto;
-    align-self: flex-start;
+  .plan-card,
+  .plan-card.commercial {
+    box-sizing: border-box;
+    min-height: 650px;
+    height: 650px;
+    align-self: stretch;
     padding: 22px;
+    display: flex;
+    flex-direction: column;
   }
 
   .plan-card .plan-description {
-    min-height: 0;
+    min-height: 36px;
     margin: 8px 0 0;
     font-size: 12.5px;
     line-height: 1.45;
@@ -57,19 +61,16 @@
   .plan-card .feature-item.unavailable::before { color: rgba(142,150,165,.42); }
 
   .plan-card .primary-button {
-    margin-top: 8px;
+    margin-top: auto;
     min-height: 50px;
     padding-block: 12px;
-  }
-
-  .plan-card.commercial {
-    padding: 24px 22px;
+    flex: 0 0 auto;
   }
 
   .plan-card.commercial .creator-symbol { margin-top: 18px; }
   .plan-card.commercial .creator-headline { margin-top: 18px; font-size: 27px; line-height: 1.04; }
   .plan-card.commercial .commercial-price { margin-top: 9px; }
-  .plan-card.commercial .plan-description { margin-top: 9px; min-height: 0; line-height: 1.5; }
+  .plan-card.commercial .plan-description { margin-top: 9px; min-height: 54px; line-height: 1.5; }
   .plan-card.commercial .plan-features { margin-top: 18px; margin-bottom: 18px; }
   .plan-card.commercial .feature-item { min-height: 38px; }
 }
