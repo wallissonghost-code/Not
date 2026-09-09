@@ -1,60 +1,45 @@
-.game-card-symbol img {
-  width: calc(100% + 44px);
-  height: 205px;
-  margin-inline: -22px;
-  object-fit: cover;
-  object-position: center;
-  display: block;
+.game-card-symbol img { width: calc(100% + 44px); height: 205px; margin-inline: -22px; object-fit: cover; object-position: center; display: block; }
+.game-card footer > div { min-width: 0; flex: 1; }
+.game-card p span { display: block; color: #d7dce5; font-size: 12px; font-weight: 600; margin-bottom: 7px; }
+.game-card p small { display: block; max-width: 290px; color: var(--muted); font-size: 10px; line-height: 1.5; font-weight: 400; }
+.game-card:has(.game-card-symbol img) { min-height: 430px; }
+.game-card:has(.game-card-symbol img) .game-card-symbol { height: 205px; margin-top: 12px; overflow: hidden; border-radius: 14px; }
+
+.demo-launch { width: 100%; min-height: 46px; margin-top: 18px; border: 1px solid color-mix(in srgb, var(--game-accent) 45%, #27303b); border-radius: 13px; background: color-mix(in srgb, var(--game-accent) 7%, #0b0e13); color: #eef2f7; display: flex; align-items: center; justify-content: space-between; padding: 0 16px; font: inherit; font-size: 12px; font-weight: 700; cursor: pointer; }
+.demo-launch b { color: var(--game-accent); font-size: 12px; }
+.game-demo { display: grid; grid-template-rows: auto 1fr auto; max-height: 0; opacity: 0; overflow: hidden; margin-top: 0; border: 0 solid color-mix(in srgb, var(--game-accent) 35%, #27303b); border-radius: 16px; background: #090c11; transition: max-height .45s ease, opacity .3s ease, margin .35s ease, border-width .2s ease; }
+.game-card.demo-open .game-demo { max-height: 360px; opacity: 1; margin-top: 12px; border-width: 1px; }
+.demo-top { height: 38px; display: flex; align-items: center; justify-content: space-between; padding: 0 12px; border-bottom: 1px solid #202631; color: #8e97a7; font-size: 8px; letter-spacing: .14em; }
+.demo-top span { color: var(--game-accent); font-weight: 700; }
+.demo-top i { display: inline-block; width: 6px; height: 6px; border-radius: 50%; margin-right: 5px; background: var(--game-accent); box-shadow: 0 0 12px var(--game-accent); }
+.demo-stage { height: 150px; position: relative; overflow: hidden; background: radial-gradient(circle at 75% 30%, color-mix(in srgb, var(--game-accent) 14%, transparent), transparent 36%), linear-gradient(180deg,#0d1118,#080b10); }
+.demo-grid { position:absolute; inset:0; opacity:.14; background-image:linear-gradient(#8290a522 1px,transparent 1px),linear-gradient(90deg,#8290a522 1px,transparent 1px); background-size:24px 24px; transform:perspective(250px) rotateX(55deg) scale(1.4); transform-origin:bottom; }
+.demo-player { position:absolute; left:22%; bottom:26px; width:35px; height:35px; border:1px solid var(--game-accent); border-radius:10px; background:color-mix(in srgb,var(--game-accent) 18%,#10151c); box-shadow:0 0 25px color-mix(in srgb,var(--game-accent) 20%,transparent); display:grid; place-items:center; transition:transform .3s ease; }
+.demo-player span { font-size:7px; font-weight:800; color:var(--game-accent); }
+.demo-target { position:absolute; width:18px; height:18px; border-radius:50%; background:color-mix(in srgb,var(--game-accent) 35%,#202832); border:1px solid var(--game-accent); transition:transform .35s ease,opacity .35s ease; }
+.target-a { right:24%; bottom:34px; } .target-b { right:38%; top:35px; transform:scale(.72); opacity:.65; }
+.demo-orb { position:absolute; border-radius:50%; filter:blur(20px); opacity:.2; background:var(--game-accent); } .orb-a{width:70px;height:70px;right:-20px;top:10px}.orb-b{width:45px;height:45px;left:35%;bottom:-25px}
+.demo-event { position:absolute; left:12px; top:12px; padding:6px 8px; border-radius:7px; background:#080b10d9; border:1px solid #222a36; color:#aab3c2; font-size:7px; letter-spacing:.08em; text-transform:uppercase; }
+.demo-controls { display:grid; grid-template-columns:repeat(3,1fr); gap:6px; padding:9px; border-top:1px solid #202631; }
+.demo-controls button { min-width:0; min-height:34px; border:1px solid #29313e; border-radius:9px; background:#10141b; color:#aeb7c6; font-size:7px; font-weight:700; letter-spacing:.06em; cursor:pointer; }
+.demo-controls button:active { border-color:var(--game-accent); color:var(--game-accent); transform:scale(.97); }
+.demo-stage.pulse-0 .demo-player { transform:translateX(35px) rotate(8deg); }
+.demo-stage.pulse-0 .target-a { transform:scale(.2); opacity:.15; }
+.demo-stage.pulse-1 .demo-player { transform:scale(1.22); box-shadow:0 0 38px var(--game-accent); }
+.demo-stage.pulse-1 .target-b { transform:scale(1.6); opacity:1; }
+.demo-stage.pulse-2 { animation:demo-flash .55s ease; }
+.demo-stage.pulse-2 .target-a,.demo-stage.pulse-2 .target-b { transform:translateY(-22px) scale(1.3); }
+@keyframes demo-flash { 50% { box-shadow:inset 0 0 70px color-mix(in srgb,var(--game-accent) 28%,transparent); } }
+
+@media (max-width:760px) {
+  .game-card:has(.game-card-symbol img) { min-height:390px; }
+  .game-card-symbol img { height:185px; }
+  .game-card:has(.game-card-symbol img) .game-card-symbol { height:185px; }
+  .game-card p small { max-width:260px; font-size:9.5px; }
+  .demo-launch { min-height:44px; margin-top:14px; }
+  .game-card.demo-open { min-height:auto; }
+  .game-card.demo-open .game-demo { max-height:330px; }
+  .demo-stage { height:135px; }
 }
 
-.game-card footer > div {
-  min-width: 0;
-  flex: 1;
-}
-
-.game-card p span {
-  display: block;
-  color: #d7dce5;
-  font-size: 12px;
-  font-weight: 600;
-  margin-bottom: 7px;
-}
-
-.game-card p small {
-  display: block;
-  max-width: 290px;
-  color: var(--muted);
-  font-size: 10px;
-  line-height: 1.5;
-  font-weight: 400;
-}
-
-.game-card:has(.game-card-symbol img) {
-  min-height: 430px;
-}
-
-.game-card:has(.game-card-symbol img) .game-card-symbol {
-  height: 205px;
-  margin-top: 12px;
-  overflow: hidden;
-  border-radius: 14px;
-}
-
-@media (max-width: 760px) {
-  .game-card:has(.game-card-symbol img) {
-    min-height: 390px;
-  }
-
-  .game-card-symbol img {
-    height: 185px;
-  }
-
-  .game-card:has(.game-card-symbol img) .game-card-symbol {
-    height: 185px;
-  }
-
-  .game-card p small {
-    max-width: 260px;
-    font-size: 9.5px;
-  }
-}
+@media (prefers-reduced-motion:reduce) { .game-demo,.demo-player,.demo-target { transition:none; } .demo-stage.pulse-2 { animation:none; } }
