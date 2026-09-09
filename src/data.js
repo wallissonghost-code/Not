@@ -16,8 +16,9 @@ export const launchEndsAt = '2026-11-01T00:00:00-03:00';
 
 export const plans = [
   {
-    name: 'NORMAL', launchPrice: '9,99', regularPrice: '19,90', suffix: '/ mês', description: 'Para começar.', featured: false,
+    name: 'NORMAL', tone: 'normal', launchPrice: '9,99', regularPrice: '19,90', suffix: '/ mês', description: 'Para começar com a NOT em um dispositivo por vez.', featured: false,
     features: [
+      { label: '1 acesso simultâneo', included: true },
       { label: 'Acesso a uma seleção de jogos', included: true },
       { label: 'Conector NOT', included: true },
       { label: 'Benefícios básicos', included: true },
@@ -28,8 +29,9 @@ export const plans = [
     ]
   },
   {
-    name: 'PLUS', launchPrice: '20,00', regularPrice: '34,90', suffix: '/ mês', description: 'Melhor custo-benefício para aproveitar a NOT completa.', featured: true, badge: 'MAIS POPULAR',
+    name: 'PLUS', tone: 'plus', launchPrice: '20,00', regularPrice: '34,90', suffix: '/ mês', description: 'Mais liberdade: use a NOT em até dois acessos simultâneos.', featured: true, badge: 'MAIS POPULAR',
     features: [
+      { label: '2 acessos simultâneos', included: true },
       { label: 'Acesso a uma seleção de jogos', included: true },
       { label: 'Conector NOT', included: true },
       { label: 'Benefícios básicos', included: true },
@@ -40,8 +42,9 @@ export const plans = [
     ]
   },
   {
-    name: 'PREMIUM', launchPrice: '39,99', regularPrice: '54,90', suffix: '/ mês', description: 'Para quem quer tudo.', featured: false,
+    name: 'PREMIUM', tone: 'premium', launchPrice: '39,99', regularPrice: '54,90', suffix: '/ mês', description: 'Tudo da NOT com até quatro acessos simultâneos e vantagens antecipadas.', featured: false,
     features: [
+      { label: '4 acessos simultâneos', included: true },
       { label: 'Acesso a uma seleção de jogos', included: true },
       { label: 'Conector NOT', included: true },
       { label: 'Benefícios básicos', included: true },
