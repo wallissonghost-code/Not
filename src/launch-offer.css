@@ -113,6 +113,26 @@
 @media (hover:none),(pointer:coarse){.plan-card{transform:none}.plan-card:active{transform:scale(.995)}}
 @media (prefers-reduced-motion:reduce){.plan-card,.offer-activated,.price-offer-row,.price-reveal,.card-offer-timer{animation:none!important;transition:none!important}.plan-card:hover,.plan-card:active{transform:none}}
 
+/* Desktop: all four plans must always fit inside the section. This prevents
+   the Creator card from being clipped by .site-shell when browser zoom changes. */
+@media (min-width:1201px){
+  .plan-grid{
+    --plan-gap:14px;
+    display:grid!important;
+    grid-template-columns:repeat(4,minmax(0,1fr))!important;
+    width:100%;
+    overflow:visible;
+    padding:4px 0 14px;
+    scroll-snap-type:none;
+  }
+  .plan-grid .plan-card{
+    width:100%;
+    min-width:0;
+    flex:none;
+    scroll-snap-align:none;
+  }
+}
+
 /* Tablet: about three cards visible; carousel remains horizontal. */
 @media (min-width:721px) and (max-width:1200px){
   .plan-grid{--plan-gap:13px;--plan-width:clamp(260px,30vw,300px)}
